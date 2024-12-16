@@ -60,7 +60,7 @@ public class AccountDAO {
         }
     }
     public boolean createAccount(Account account) {
-        Session session = null;
+        Session session = null; // vừa thử đẩy lên
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();  // Bắt đầu giao dịch

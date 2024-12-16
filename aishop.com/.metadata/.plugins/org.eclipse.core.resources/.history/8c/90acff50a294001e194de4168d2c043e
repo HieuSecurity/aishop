@@ -1,0 +1,29 @@
+
+
+var maxLength = 18;
+var elements = document.getElementsByClassName("text_limit");
+
+for (var i = 0; i < elements.length; i++) {
+  var text = elements[i].innerHTML;
+
+  if (text.length > maxLength) {
+    var trimmedText = text.substr(0, maxLength) + "...";
+    elements[i].innerHTML = trimmedText;
+  }
+}
+
+
+
+var aside_ronate = document.getElementById("aside-event");
+var ronate_1 = document.getElementById("ronate-show");
+var ronate_2 = document.getElementById("ronate-hidden");
+var aside_small = document.getElementById('aishop-top-small');
+
+aside_ronate.addEventListener('click', function(event) {
+  if (aside_small.style.display === 'block') {
+    ronate_2.style.display = 'block';
+  }
+  else {
+    ronate_1.style.display = 'none';
+  }
+});

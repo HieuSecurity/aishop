@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item key="selection" value="aishop-single-prod"/>
+		<item key="wrap" value="true"/>
+		<item key="casesensitive" value="false"/>
+		<item key="wholeword" value="false"/>
+		<item key="incremental" value="false"/>
+		<item key="isRegEx" value="false"/>
+		<list key="findhistory">
+			<item value="aishop-single-prod"/>
+			<item value="product-title"/>
+			<item value="/img/pro_img"/>
+			<item value="/resources/assets/img/prod_img/"/>
+			<item value="td .group"/>
+			<item value="add-prod__content"/>
+			<item value="aishop-footer"/>
+			<item value="text-align-center"/>
+			<item value=".styled-table thead tr th"/>
+			<item value="card-body"/>
+			<item value="border_ta"/>
+			<item value=".content__header"/>
+			<item value="product-cont1"/>
+			<item value="product-table"/>
+			<item value="aishop-content"/>
+		</list>
+		<list key="replacehistory">
+			<item value="/img/pro-img"/>
+			<item value="/aishop/resources/assets/img/pro_img/"/>
+			<item value=""/>
+			<item value="cursor-pointer"/>
+			<item value="/aishop/resources/assets/img/aishop_default/"/>
+			<item value="/aishop/resources/assets/img/"/>
+			<item value="aishop/dashboard.htm"/>
+			<item value="&quot;/aishop&quot;"/>
+			<item value="pb-3 font-logo border-light border-bottom text-light"/>
+			<item value="text-light"/>
+			<item value=" &lt;div class=&quot;row d-flex justify-content-between&quot;&gt;"/>
+			<item value=".htm"/>
+			<item value="/aishop/"/>
+			<item value="&quot;/aishop/&quot;"/>
+			<item value="/aishop/resources/assets/img/brand"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="1075"/>
+		<item key="DIALOG_Y_ORIGIN" value="575"/>
+		<item key="DIALOG_WIDTH" value="414"/>
+		<item key="DIALOG_HEIGHT" value="454"/>
+		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+	</section>
+</section>

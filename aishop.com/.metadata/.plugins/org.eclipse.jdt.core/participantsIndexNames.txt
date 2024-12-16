@@ -1,0 +1,11 @@
+INDEX VERSION 1.134
+D:\Workspace\HK_1_23_24\lap_trinh_web\aishop.com\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\548774194.index
+\aishop\src\main\java
+D:\Workspace\HK_1_23_24\lap_trinh_web\aishop.com\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2587272993.index
+\aishop\src\main\java
+D:\Workspace\HK_1_23_24\lap_trinh_web\aishop.com\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2591831885.index
+\aishop\src\main\java
+D:\Workspace\HK_1_23_24\lap_trinh_web\aishop.com\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2461432716.index
+\aishop\src\main\java
+D:\Workspace\HK_1_23_24\lap_trinh_web\aishop.com\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3759456721.index
+\aishop\src\main\java

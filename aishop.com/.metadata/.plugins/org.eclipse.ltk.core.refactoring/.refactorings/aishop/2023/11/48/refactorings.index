@@ -1,0 +1,6 @@
+1700987362169	Move 'resources' to 'webapp'
+1700988879779	Rename resource 'sign-up--passwd.html'
+1700988928722	Rename resource 'sign-up--verify.html'
+1700989910319	Rename type 'Views'
+1700990015560	Move 6 resources to 'client'
+1700990020214	Move 4 resources to 'auth'

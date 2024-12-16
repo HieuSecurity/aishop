@@ -1,0 +1,142 @@
+#aishop-top {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+}
+
+#aishop-header {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    top: 40px;
+    background-color: #fff;
+}
+
+#aishop-prod-content > .row {
+    display: flex;
+    align-items: baseline;
+    margin-top: 100px;
+}
+
+#aishop-prod-content h1 {
+    font-weight: 400;
+    font-size: 25px;
+}
+
+
+/* Category sidebar */
+
+.category__sidebar {
+    width: 200px;
+}
+
+.category__sidebar h1 {
+    font-weight: 400;
+    font-size: 25px;
+}
+
+.sidebar_list {
+    padding-left: 5px;
+}
+
+.sidebar_list > li {
+    font-size: 20px;
+}
+
+.list_title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.icon-down {
+    align-self: center;
+}
+
+.list_title .icon-down:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.list_items {
+    padding-left: 10px;
+    font-size: 16px;
+}
+
+
+/* Main product content */
+
+.products__container {
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
+}
+
+.container__header {
+    display: flex;
+    width: 100%;
+    height: 38px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header__featured {
+    display: block;
+    width: 300px;
+    height: 38px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.content__single-prod {
+    width: 300px;
+    margin-top: 20px;
+}
+
+.single-prod__text ul,li {
+    padding-left: 0px;
+}
+
+.single-prod__text .text__product {
+    color: #000;
+}
+
+.footer__pagigation {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.pagigation__item {
+    width: 60px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.25rem;
+}
+
+.pagigation__item a {
+    width: 60px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagigation__item--enabled {
+    background-color: #fff;
+}
+
+.pagigation__item--enabled a {
+    color: #000;
+}
+
+.pagigation__item--disabled {
+    background-color: #59ab6e;
+    color: #fff;
+}   

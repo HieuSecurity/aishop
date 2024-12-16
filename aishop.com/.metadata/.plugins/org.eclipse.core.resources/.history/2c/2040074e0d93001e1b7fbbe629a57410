@@ -1,0 +1,23 @@
+
+const navItem = document.querySelectorAll('.nav-item');
+const prodListItem = document.querySelectorAll('.prod-list__item');
+
+function toggleSidebar(item) {
+    for (let i = 0; i < navItem.length; i++) {
+        navItem[i].style.display = 'none';
+
+        if (i == item) {
+            if (navItem[i].style.display === 'none') {
+                navItem[i].style.display = 'block';
+            } else if (navItem[i].style.display === 'block') {
+                navItem[i].style.display = 'none';
+            }
+        }
+    }
+}
+
+navItem.forEach(function (item) {
+    item.addEventListener('click', function onCLick(){
+        toggleSidebar(index);
+    });
+});

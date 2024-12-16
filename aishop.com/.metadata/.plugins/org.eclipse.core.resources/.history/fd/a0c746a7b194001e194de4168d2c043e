@@ -1,0 +1,13 @@
+
+
+var maxLength = 18;
+var elements = document.getElementsByClassName("text_limit");
+
+for (var i = 0; i < elements.length; i++) {
+  var text = elements[i].innerHTML;
+
+  if (text.length > maxLength) {
+    var trimmedText = text.substr(0, maxLength) + "...";
+    elements[i].innerHTML = trimmedText;
+  }
+}

@@ -1,0 +1,79 @@
+/* Responsive */
+/* PC */
+@media (min-width: 1024px) {
+
+}
+
+/* Tablet */
+@media (min-width: 740px) and (max-width: 1023px) {
+    
+}
+
+/* Mobile */
+@media (max-width: 739px) {
+    /* Shop */
+    #aishop-prod-content {
+        max-width: 739px;
+    }
+
+    .category__sidebar {
+        display: none;
+    }
+
+    .container__header {
+        justify-content: center;
+    }
+
+    .container__header .col-md-6 {
+        padding-right: 0;
+    }
+
+    .header__featured {
+        width: 180px;
+        padding-right: 0;
+    }
+
+    .container__content .col-md-4 {
+        display: flex;
+        justify-content: center;
+    }
+
+    .footer__pagigation {
+        justify-content: center;
+    }
+
+    /* Shop Single */
+    #aishop-single-prod > .row {
+        flex-direction: column;
+    }
+
+    .prod__section-img {
+        width: calc(100% - 8%);
+    }
+
+    .prod__section-img .row {
+        width: 380px;
+    }
+
+    .card-body .row {
+        flex-direction: column;
+    }
+
+    .card-body .row .col:first-child {
+        margin-bottom: 15px;
+    }
+
+    /* Add Product */
+    #add-prod__content {
+        width: 610px;
+    }
+
+    .content__main {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .main__prod-media {
+        margin-top: 25px;
+    }
+}

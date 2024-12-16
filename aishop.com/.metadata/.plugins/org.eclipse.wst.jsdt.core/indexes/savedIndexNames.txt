@@ -1,0 +1,8 @@
+INDEX VERSION 1.4+D:\Workspace\HK_1_23_24\lap_trinh_web\aishop.com\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+2747074240.index
+681695931.index
+1244400913.index
+2587272993.index
+370987445.index
+1362606051.index
+4178327933.index

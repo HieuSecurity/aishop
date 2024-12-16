@@ -1,0 +1,14 @@
+127.0.0.1 - - [02/Dec/2023:08:12:00 +0700] "GET / HTTP/1.1" 404 751
+0:0:0:0:0:0:0:1 - - [02/Dec/2023:08:12:01 +0700] "GET /aishop/ HTTP/1.1" 200 13712
+0:0:0:0:0:0:0:1 - - [02/Dec/2023:08:12:01 +0700] "GET /aishop/resources/assets/css/homepage.css HTTP/1.1" 200 5109
+0:0:0:0:0:0:0:1 - - [02/Dec/2023:08:12:01 +0700] "GET /aishop/resources/assets/js/style.js HTTP/1.1" 200 618
+0:0:0:0:0:0:0:1 - - [02/Dec/2023:08:12:01 +0700] "GET /aishop/resources/assets/css/general.css HTTP/1.1" 200 3958
+0:0:0:0:0:0:0:1 - - [02/Dec/2023:08:12:01 +0700] "GET /aishop/favicon.ico HTTP/1.1" 200 172206
+0:0:0:0:0:0:0:1 - - [02/Dec/2023:08:12:03 +0700] "GET /aishop/about.htm HTTP/1.1" 200 13712
+0:0:0:0:0:0:0:1 - - [02/Dec/2023:08:12:04 +0700] "GET /aishop/shop.htm HTTP/1.1" 200 13713
+0:0:0:0:0:0:0:1 - - [02/Dec/2023:08:12:05 +0700] "GET /aishop/sign-in.htm HTTP/1.1" 200 2663
+0:0:0:0:0:0:0:1 - - [02/Dec/2023:08:12:05 +0700] "GET /aishop/resources/assets/css/auth.css HTTP/1.1" 200 2131
+0:0:0:0:0:0:0:1 - - [02/Dec/2023:08:12:05 +0700] "GET /aishop/resources/assets/css/auth-account.css HTTP/1.1" 200 3552
+0:0:0:0:0:0:0:1 - - [02/Dec/2023:08:12:05 +0700] "GET /aishop/resources/assets/img/logo-icon.png HTTP/1.1" 200 28742
+0:0:0:0:0:0:0:1 - - [02/Dec/2023:08:12:06 +0700] "GET /aishop HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [02/Dec/2023:08:12:06 +0700] "GET /aishop/ HTTP/1.1" 200 13712

@@ -1,6 +1,6 @@
 package aishop.controller;
 
-
+import aishop.dao.ProductDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,12 +15,14 @@ import aishop.dao.AccountDAO;
 import aishop.entity.Account;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
+import aishop.entity.Product;
 @Controller
 public class Auth {
 	 @Autowired
 	 AccountDAO accountDAO;
-	   
+	 @Autowired
+	 ProductDAO productDAO;
+	 
 	    
 	
 	 @RequestMapping(value = "/account")
@@ -99,6 +101,7 @@ public class Auth {
 	         return "auth/sign-up";  // Trả lại trang đăng ký với thông báo lỗi
 	     }
 	 }
+
 	 @RequestMapping(value = "/sign-in")
 		public String sign_in(){
 			return "auth/sign-in";

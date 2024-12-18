@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,7 +37,7 @@
                     </div>
                     <div class="my-account-auth">
                         <div class="p-relative">
-                            <a href="/aishop/dashboards.htm" class="text-light" style="font-size: 14px !important;">Admin</a>
+                            <a href="/aishop/dashboard.htm" class="text-light" style="font-size: 14px !important;">Admin</a>
                             /
                             <a href="/aishop/sign-up.htm" class="text-light" style="font-size: 14px !important;"> Sign up</a>
                         </div>
@@ -138,243 +140,58 @@
 
     <!-- Start Main Content -->
     <main id="aishop-prod-content" class="container pt-5 pb-5">
-        <div class="row justify-content-between">
-            <div class="category__sidebar text-dark col-lg-3">
-                <h1>Categories</h1>
-                <ul class="sidebar_list">
-                    <li>
-                        <div class="list_title">
-                            Gender
-                            <i class="fa fa-fw fa-chevron-circle-down mt-1 icon-down"></i>
+    <div class="row justify-content-between">
+        <div class="products__container col-lg-9 text-dark">
+            <div class="container__content row" style="margin-bottom: 39px;">
+                <!-- Lặp qua các sản phẩm -->
+                <c:forEach var="product" items="${products}">
+                    <div class="col-md-4">
+                        <div class="card mb-4 product-wap rounded-0 content__single-prod shadow">
+                            <div class="card rounded-0 single-prod__img">
+                                <img class="card-img rounded-0 img-fluid" src="/aishop/resources/assets/img/pro-img/${product.image}">
+                                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                                    <ul class="list-unstyled">
+                                        <li><div class="btn btn-success text-white"><i class="far fa-heart"></i></div></li>
+                                        <li><a class="btn btn-success text-white mt-2" href="/aishop/shop-single.htm?id=${product.id}"><i class="far fa-eye"></i></a></li>
+                                        <li><a class="btn btn-success text-white mt-2" href="/aishop/cart.htm?id=${product.id}"><i class="fas fa-cart-plus"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body single-prod__text">
+                                <ul>
+                                    <li class="item-card">
+                                        <a href="/aishop/shop-single.htm?id=${product.id}" class="text-decoration-none text__product">${product.name}</a>
+                                    </li>
+                                    <li class="item-card">${product.price}</li>
+                                </ul>
+                            </div>
                         </div>
-                        <ul class="list_items" style="display: none">
-                            <li>Cate 1</li>
-                            <li>Cate 2</li>
-                            <li>Cate 3</li>
-                        </ul>
+                    </div>
+                </c:forEach>
+            </div>
+            <div class="container__footer row">
+                <ul class="footer__pagigation">
+                    <li class="pagigation__item pagigation__item--disabled shadow-sm">
+                        1
                     </li>
-                    <li>
-                        <div class="list_title">
-                            Sale
-                            <i class="fa fa-fw fa-chevron-circle-down mt-1 icon-down"></i>
-                        </div>
-                        <ul class="list_items" style="display: none">
-                            <li>Cate 1</li>
-                            <li>Cate 2</li>
-                            <li>Cate 3</li>
-                        </ul>
+                    <li class="pagigation__item pagigation__item--enable shadow-sm">
+                        <a href="">2</a>
                     </li>
-                    <li>
-                        <div class="list_title">
-                            Brand
-                            <i class="fa fa-fw fa-chevron-circle-down mt-1 icon-down"></i>
-                        </div>
-                        <ul class="list_items" style="display: none">
-                            <li>Cate 1</li>
-                            <li>Cate 2</li>
-                            <li>Cate 3</li>
-                        </ul>
+                    <li class="pagigation__item pagigation__item--enable shadow-sm">
+                        <a href="">3</a>
+                    </li>
+                    <li class="pagigation__item pagigation__item--enable shadow-sm">
+                        ...
+                    </li>
+                    <li class="pagigation__item pagigation__item--enable shadow-sm">
+                        <a href="">10</a>
                     </li>
                 </ul>
             </div>
-            <div class="products__container col-lg-9 text-dark">
-                <div class="container__header">
-                    <h1>Products</h1>
-                    <div class="col-md-6 pb-4">
-                        <select class="header__featured">
-                            <option>Featured</option>
-                            <option>etc...</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="container__content row" style="margin-bottom: 39px;">
-                    <div class="col-md-4">
-                        <div class="card mb-4 product-wap rounded-0 content__single-prod shadow">
-                            <div class="card rounded-0 single-prod__img">
-                                <img class="card-img rounded-0 img-fluid" src="/aishop/resources/assets/img/pro-img/Picture1.png" alt="">
-                                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                                    <ul class="list-unstyled">
-                                        <li><div class="btn btn-success text-white"><i class="far fa-heart"></i></div></li>
-                                        <li><a class="btn btn-success text-white mt-2" href="/aishop/shop-single.htm"><i class="far fa-eye"></i></a></li>
-                                        <li><a class="btn btn-success text-white mt-2" href="/aishop/cart.htm"><i class="fas fa-cart-plus"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card-body single-prod__text">
-                                <ul>
-                                    <li class="item-card">
-                                        <a href="/aishop/shop-single.htm" class="text-decoration-none text__product">Kem Lót Maybelline Fit Me Matte + Poreless Kiềm Dầu Spf20 30Ml</a>
-                                    </li>
-                                    <li class="item-card">
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                    </li>
-                                    <li class="item-card">218,000₫</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card mb-4 product-wap rounded-0 content__single-prod shadow">
-                            <div class="card rounded-0 single-prod__img">
-                                <img class="card-img rounded-0 img-fluid" src="/aishop/resources/assets/img/pro-img/Picture10.png" alt="">
-                                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                                    <ul class="list-unstyled">
-                                        <li><div class="btn btn-success text-white"><i class="far fa-heart"></i></div></li>
-                                        <li><a class="btn btn-success text-white mt-2" href="/aishop/shop-single.htm"><i class="far fa-eye"></i></a></li>
-                                        <li><a class="btn btn-success text-white mt-2" href="/aishop/cart.htm"><i class="fas fa-cart-plus"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card-body single-prod__text">
-                                <ul>
-                                    <li class="item-card"><a href="/aishop/shop-single.htm" class="text-decoration-none text__product">Kem Lót Maybelline Fit Me Matte + Poreless Kiềm Dầu Spf20 30Ml</a></li>
-                                    <li class="item-card">
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                    </li>
-                                    <li class="item-card">218,000₫</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card mb-4 product-wap rounded-0 content__single-prod shadow">
-                            <div class="card rounded-0 single-prod__img">
-                                <img class="card-img rounded-0 img-fluid" src="/aishop/resources/assets/img/pro-img/Picture11.png" alt="">
-                                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                                    <ul class="list-unstyled">
-                                        <li><div class="btn btn-success text-white"><i class="far fa-heart"></i></div></li>
-                                        <li><a class="btn btn-success text-white mt-2" href="/aishop/shop-single.htm"><i class="far fa-eye"></i></a></li>
-                                        <li><a class="btn btn-success text-white mt-2" href="/aishop/cart.htm"><i class="fas fa-cart-plus"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card-body single-prod__text">
-                                <ul>
-                                    <li class="item-card"><a href="/aishop/shop-single.htm" class="text-decoration-none text__product">Kem Lót Maybelline Fit Me Matte + Poreless Kiềm Dầu Spf20 30Ml</a></li>
-                                    <li class="item-card">
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                    </li>
-                                    <li class="item-card">218,000₫</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card mb-4 product-wap rounded-0 content__single-prod shadow">
-                            <div class="card rounded-0 single-prod__img">
-                                <img class="card-img rounded-0 img-fluid" src="/aishop/resources/assets/img/pro-img/Picture12.png" alt="">
-                                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                                    <ul class="list-unstyled">
-                                        <li><div class="btn btn-success text-white"><i class="far fa-heart"></i></div></li>
-                                        <li><a class="btn btn-success text-white mt-2" href="/aishop/shop-single.htm"><i class="far fa-eye"></i></a></li>
-                                        <li><a class="btn btn-success text-white mt-2" href="/aishop/cart.htm"><i class="fas fa-cart-plus"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card-body single-prod__text">
-                                <ul>
-                                    <li class="item-card"><a href="/aishop/shop-single.htm" class="text-decoration-none text__product">Kem Lót Maybelline Fit Me Matte + Poreless Kiềm Dầu Spf20 30Ml</a></li>
-                                    <li class="item-card">
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                    </li>
-                                    <li class="item-card">218,000₫</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card mb-4 product-wap rounded-0 content__single-prod shadow">
-                            <div class="card rounded-0 single-prod__img">
-                                <img class="card-img rounded-0 img-fluid" src="/aishop/resources/assets/img/pro-img/Picture13.png" alt="">
-                                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                                    <ul class="list-unstyled">
-                                        <li><div class="btn btn-success text-white"><i class="far fa-heart"></i></div></li>
-                                        <li><a class="btn btn-success text-white mt-2" href="/aishop/shop-single.htm"><i class="far fa-eye"></i></a></li>
-                                        <li><a class="btn btn-success text-white mt-2" href="/aishop/cart.htm"><i class="fas fa-cart-plus"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card-body single-prod__text">
-                                <ul>
-                                    <li class="item-card"><a href="/aishop/shop-single.htm" class="text-decoration-none text__product">Kem Lót Maybelline Fit Me Matte + Poreless Kiềm Dầu Spf20 30Ml</a></li>
-                                    <li class="item-card">
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                    </li class="item-card">
-                                    <li>218,000₫</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card mb-4 product-wap rounded-0 content__single-prod shadow">
-                            <div class="card rounded-0 single-prod__img">
-                                <img class="card-img rounded-0 img-fluid" src="/aishop/resources/assets/img/pro-img/Picture14.png" alt="">
-                                <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
-                                    <ul class="list-unstyled">
-                                        <li><div class="btn btn-success text-white"><i class="far fa-heart"></i></div></li>
-                                        <li><a class="btn btn-success text-white mt-2" href="/aishop/shop-single.htm"><i class="far fa-eye"></i></a></li>
-                                        <li><a class="btn btn-success text-white mt-2" href="/aishop/cart.htm"><i class="fas fa-cart-plus"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card-body single-prod__text">
-                                <ul>
-                                    <li class="item-card"><a href="/aishop/shop-single.htm" class="text-decoration-none text__product">Kem Lót Maybelline Fit Me Matte + Poreless Kiềm Dầu Spf20 30Ml</a></li>
-                                    <li class="item-card">
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                        <i class="fa-regular fa-star"></i>
-                                    </li>
-                                    <li class="item-card">218,000₫</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="container__footer row">
-                    <ul class="footer__pagigation">
-                        <li class="pagigation__item pagigation__item--disabled shadow-sm">
-                            1
-                        </li>
-                        <li class="pagigation__item pagigation__item--enable shadow-sm">
-                            <a href="">2</a>
-                        </li>
-                        <li class="pagigation__item pagigation__item--enable shadow-sm">
-                            <a href="">3</a>
-                        </li>
-                        <li class="pagigation__item pagigation__item--enable shadow-sm">
-                            ...
-                        </li>
-                        <li class="pagigation__item pagigation__item--enable shadow-sm">
-                            <a href="">10</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
         </div>
-    </main>
+    </div>
+</main>
+
     <!-- End Main Content -->
 
     <!-- Start Footer-->

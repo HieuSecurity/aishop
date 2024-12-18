@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/aishop/resources/assets/css/general.css">
     <link rel="stylesheet" href="/aishop/resources/assets/css/dashboards.css">
 
@@ -68,25 +68,25 @@
                         </div>
                         <ul id="product-option" style="display: block;">
                             <li>
-                                <a class="nav-item--link d-flex align-items-center justify-content-around" style="padding-right: 1.75rem; background: aliceblue; padding-left: 3.25rem;" href="/aishop/manager-ID_PRODUCT.htm">
+                                <a class="nav-item--link d-flex align-items-center justify-content-around" style="padding-right: 1.75rem; padding-left: 3.25rem;" href="/aishop/manager-products.htm">
                                     <svg height=".4rem" width=".4rem" viewBox="0 0 512 512">
                                         <path style="fill:#8799ac; stroke-width: 6px" d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"/>
                                     </svg>
                                     <span class="nav-font">Products</span>
-                                    <svg viewBox="0 0 512 512" class="margin-left-sm svg-inline--fa fa-angle-right fa-lg" height="1rem" width=".7rem">
-										<path fill="currentColor" d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z" class=""></path>
-									</svg>
+									<svg width='1rem' height='1rem' viewBox='0 0 24 24' fill='%2371869d'>
+                                        <path style="fill:#8799ac; stroke-width: 6px" d='M12.72,15.78a.75.75,0,0,1-.53.22h-.38a.77.77,0,0,1-.53-.22L6.15,10.64a.5.5,0,0,1,0-.71l.71-.71a.49.49,0,0,1,.7,0L12,13.67l4.44-4.45a.5.5,0,0,1,.71,0l.7.71a.5.5,0,0,1,0,.71Z'/>
+                                    </svg>
                                 </a>
                             </li>
                             <li>
-                                <a class="nav-item--link d-flex align-items-center justify-content-around" style="padding-right: 1.75rem; padding-left: 3.25rem;" href="/aishop/product-detail.htm">
+                                <a class="nav-item--link d-flex align-items-center justify-content-around" style="padding-right: 1.75rem; background: aliceblue; padding-left: 3.25rem;" href="/aishop/product-detail.htm">
                                     <svg height=".4rem" width=".4rem" viewBox="0 0 512 512">
                                         <path style="fill:#8799ac; stroke-width: 6px" d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"/>
                                     </svg>
                                     <span class="nav-font">Add Product</span>
-                                    <svg width='1rem' height='1rem' viewBox='0 0 24 24' fill='%2371869d'>
-                                        <path style="fill:#8799ac; stroke-width: 6px" d='M12.72,15.78a.75.75,0,0,1-.53.22h-.38a.77.77,0,0,1-.53-.22L6.15,10.64a.5.5,0,0,1,0-.71l.71-.71a.49.49,0,0,1,.7,0L12,13.67l4.44-4.45a.5.5,0,0,1,.71,0l.7.71a.5.5,0,0,1,0,.71Z'/>
-                                    </svg>
+                                    <svg viewBox="0 0 512 512" class="margin-left-sm svg-inline--fa fa-angle-right fa-lg" height="1rem" width=".7rem">
+										<path fill="currentColor" d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z" class=""></path>
+									</svg>
                                 </a>
                             </li>
                         </ul>
@@ -234,7 +234,6 @@
 	<!-- End Aside Admin views -->
 	
 	
-	
 	<!-- Start Header Admin views -->
 	
     <header id="aishop-header" class="header-border">
@@ -312,79 +311,84 @@
 	
 	<!-- End Header Admin views -->
 	
-	<!-- End Main Content Admin Views -->
-
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-<main id="aishop-content" class="product">
-    <div class="product-head">
-        <div class="product-cont">
-            <div class="product-cont">
-                <div class="content__header">
-                    <div class="header__breadcrumb">
-                        <p class="breadcrumb__root">Products /</p>
-                        <p class="breadcrumb__leaf text-dark">List of Products</p>
-                    </div>
-                    <h1 class="header__heading text-dark">Products</h1>
-                </div>
+	<!-- Start Main Content Admin Views -->
+	<main id="aishop-content">
+    <div id="add-prod__content" class="text-dark">
+        <div class="content__header">
+            <div class="header__breadcrumb">
+                <p class="breadcrumb__root">Products /</p>
+                <p class="breadcrumb__leaf">Edit product</p>
             </div>
-            <div class="product-cont1">
-                <a href=""><i class="fa-solid fa-download"></i> Export</a>
-                <a href=""><i class="fa-solid fa-upload"></i> Import</a>
-            </div>
+            <h1 class="header__heading">Edit product</h1>
         </div>
-        <div class="product-btn">
-            <a href="/aishop/product-detail.htm"><button>Add product</button></a>
-        </div>
-    </div>
-
-    <div class="product-body">
-        <p class="underline">All products</p>
-
-        <div class="product-table border_table">
-            <div class="product-table-detail">
-                <div class="product-search">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="search" placeholder="Search product">
-                    <span class="under"></span>
-                </div>
-                <table class="styled-table">
-                    <thead>
-                        <tr>
-                            <th>ID_PRODUCT</th>
-                            <th>PRODUCT</th>
-                            <th>TRADEMARK</th>
-                            <th>PRICE</th>
-                            <th>ACTIONS</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Lặp qua danh sách sản phẩm và hiển thị chúng -->
-                        <c:forEach var="product" items="${products}">
-                            <tr>
-                                <td class="text-align-center">${product.id}</td>
-                                <td>${product.name}</td>
-                                <td class="text-align-center">${product.brand}</td>
-                                <td>${product.price}</td>
-                                <td>
-                                    <div class="group">
-                                        <a class="group-child" href="/aishop/edit-product.htm?id=${product.id}">
-                                            <i class="fa-solid fa-pen-to-square"></i> Edit
-                                        </a>
-                                       <a class="group-child" href="/aishop/remove-product.htm?id=${product.id}" onclick="return confirmDelete();">
-										    <i class="fa-solid fa-trash"></i> Remove
-										</a>
+        <!-- Form để chỉnh sửa sản phẩm -->
+        <form action="edit-product.htm?id=${product.id}" method="POST">
+            <div class="content__main">
+                <div class="main__prod-info col-lg-7">
+                    <div class="card">
+                        <div class="card-body border_table">
+                            <h3 class="prod-info__heading">Product information</h3>
+                            <div class="border-divider"></div>
+                            <!-- Product ID (thêm trường ID) -->
+                            <div class="prod-info__name">
+                                <p>ID Product</p>
+                                <input class="prod-info__input" type="text" name="id" value="${product.id}" readonly required>
+                            </div>
+                            <!-- Product Name -->
+                            <div class="prod-info__name">
+                                <p>Name</p>
+                                <input class="prod-info__input" placeholder="Shirt, T-shirt, etc." type="text" name="name" value="${product.name}" required>
+                            </div>
+                            <!-- Product Brand -->
+                            <div class="prod-info__tp-wrapper">
+                                <div class="tp-wrapper__trademark">
+                                    <p>Brand</p>
+                                    <input class="prod-info__input" placeholder="Brand Name" type="text" name="brand" value="${product.brand}" required>
+                                </div>
+                                <!-- Product Price -->
+                                <div class="tp-wrapper__price">
+                                    <p>Price</p>
+                                    <div class="price__wrapper">
+                                        <input class="prod-info__input" placeholder="0.00" type="text" name="price" value="${product.price}" required>
+                                        <select id="currency" name="currency">
+                                            <option value="vnd" selected>VND</option>
+                                        </select>
                                     </div>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
+                                </div>
+                            </div>
+                            <!-- Product Description -->
+                            <div class="prod-info__description">
+                                <p>Description <span style="color:#919aa3; font-size: 13px;">(Optional)</span></p>
+                                <textarea class="prod-info__input" placeholder="Type your input" cols="30" rows="10" name="description">${product.description}</textarea>
+                            </div>
+                            <button type="submit" class="btn btn-success">Update</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="main__prod-media col-lg-5">
+                    <div class="card">
+                        <div class="card-body border_table">
+                            <h3 class="prod-media__heading">Media</h3>
+                            <div class="border-divider"></div>
+                            <div class="pro-media__upload-wrapper">
+                                <!-- Hiển thị ảnh hiện tại nếu có -->
+                                <p>Current image: <span>${product.image != null ? product.image : 'No image uploaded'}</span></p>
+                                <p>Choose file to upload</p>
+                                <!-- Chọn ảnh mới nếu cần -->
+                                <input class="input-upfile btn-upfile" type="file" id="input-upfile" name="image" accept="image/*">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 </main>
 
+
+
+    <!-- End Main Content Admin Views -->
 	
 	<!-- Start Footer Admin views -->
 	
@@ -416,12 +420,7 @@
     </footer>
     
     <!-- End Footer Admin views -->
-    <script type="text/javascript">
-    function confirmDelete() {
-        // Hiển thị hộp thoại xác nhận
-        return confirm("Bạn có chắc chắn muốn xóa sản phẩm này?");
-    }
-</script>
+    
     <script src="/aishop/resources/assets/js/general.js"></script>
     <script src="/aishop/resources/assets/js/event-click.js"></script>
 </body>

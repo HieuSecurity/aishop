@@ -14,7 +14,7 @@
 <body>
     <div id="loading_WebAI"></div>
     <div id="frame_webAI">
-        <a href="/aishop/sign-in.htm">
+        <a href="/aishop">
             <div id="home--back">
                 <div id="arrow__page" class="arrow__style">
                     <svg height="25" width="26" style="margin-top: 2px;">

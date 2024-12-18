@@ -13,6 +13,36 @@
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
     <title>AIShop</title>
 </head>
+<style>
+    .toast {
+        visibility: hidden;
+        min-width: 250px;
+        margin-left: -125px;
+        background-color: #4CAF50;
+        color: white;
+        text-align: center;
+        border-radius: 2px;
+        padding: 16px;
+        position: fixed;
+        z-index: 1;
+        left: 50%;
+        bottom: 30px;
+        font-size: 17px;
+    }
+
+    .toast.show {
+        visibility: visible;
+        animation: fadeInOut 2s ease-in-out;
+    }
+
+    @keyframes fadeInOut {
+        0% {opacity: 0;}
+        30% {opacity: 1;}
+        70% {opacity: 1;}
+        100% {opacity: 0;}
+    }
+</style>
+
 <body>
 	
 	<!-- Start Aside Admin views -->
@@ -21,7 +51,7 @@
         <div class="navbar-option">
             <div class="navbar-top d-flex flex-col">
                 <div class="d-flex align-items-center justify-content-around w-100">
-                    <a class="py-5" href="/dashboards">
+                    <a class="py-5" href="/aishop">
                         <img class="style-logo" src="/aishop/resources/assets/img/aishop_default/logo-icon.png" alt="AIShop - Logo Website">
                     </a>
                     <span class="text-logo font-logo">AIShop</span>
@@ -313,68 +343,72 @@
 	
 	<!-- Start Main Content Admin Views -->
 	<main id="aishop-content">
-	    <div id="add-prod__content" class="text-dark">
-	        <div class="content__header">
-	            <div class="header__breadcrumb">
-	                <p class="breadcrumb__root">Products /</p>
-	                <p class="breadcrumb__leaf">Add product</p>
-	            </div>
-	            <h1 class="header__heading">Add product</h1>
-	        </div>
-	        <div class="content__main">
-	            <div class="main__prod-info col-lg-7">
-	                <div class="card">
-	                    <div class="card-body border_table">
-	                        <h3 class="prod-info__heading">Product information</h3>
-	                        <div class="border-divider"></div>
-	                        <div class="prod-info__name">
-	                            <p>Name</p>
-	                            <input class="prod-info__input" placeholder="Shirt, T-shirt, etc." type="text">
-	                        </div>
-	                        <div class="prod-info__tp-wrapper">
-	                            <div class="tp-wrapper__trademark">
-	                                <p>Trademark</p>
-	                                <input class="prod-info__input" placeholder="Hello" type="text">
-	                            </div>
-	                            <div class="tp-wrapper__price">
-	                                <p>Price</p>
-	                                <div class="price__wrapper">
-	                                    <input class="prod-info__input" placeholder="0.00" type="text">
-	                                    <select id="currency" name="currency">
-	                                        <option value="usd">USD</option>
-	                                        <option value="eur">EUR</option>
-	                                        <option value="vnd">VND</option>
-	                                        <!-- Thêm các loại tiền tệ khác nếu cần -->
-	                                    </select>
-	                                </div>
-	                            </div>
-	                        </div>
-	                        <div class="prod-info__description">
-	                            <p>Description <span style="color:#919aa3; font-size: 13px;">(Optional)</span></p>
-	                            <textarea name="" id="" class="prod-info__input" placeholder="Type your input" cols="30" rows="10"></textarea>
-	                        </div>
-	                        <button class="btn btn-success">Submit</button>
-	                    </div>
-	                </div>
-	            </div>
-	            <div class="main__prod-media col-lg-5">
-	                <div class="card">
-	                    <div class="card-body border_table">
-	                        <h3 class="prod-media__heading">Media</h3>
-	                        <div class="border-divider"></div>
-	                        <div class="pro-media__upload-wrapper">
-	                            <img class="upload-img" src="/aishop/resources/assets/img/uploadFileImages.png" alt="">
-	                            <p>Choose file to upload</p>
-	                            <p>or</p>
-	                            <input class="input-upfile" type="file" id="input-upfile" hidden>
-	                            <label class="btn-upfile" for="input-upfile">Browses File</label>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-	</main>
+    <div id="add-prod__content" class="text-dark">
+        <div class="content__header">
+            <div class="header__breadcrumb">
+                <p class="breadcrumb__root">Products /</p>
+                <p class="breadcrumb__leaf">Add product</p>
+            </div>
+            <h1 class="header__heading">Add product</h1>
+        </div>
+        <!-- Thêm thẻ form để gửi dữ liệu -->
+        <form action="product-detail.htm" method="POST">
+            <div class="content__main">
+                <div class="main__prod-info col-lg-7">
+                    <div class="card">
+                        <div class="card-body border_table">
+                            <h3 class="prod-info__heading">Product information</h3>
+                            <div class="border-divider"></div>
+                            <!-- Product Name -->
+                            <div class="prod-info__name">
+                                <p>Name</p>
+                                <input class="prod-info__input" placeholder="Shirt, T-shirt, etc." type="text" name="name" required>
+                            </div>
+                            <!-- Product Brand -->
+                            <div class="prod-info__tp-wrapper">
+                                <div class="tp-wrapper__trademark">
+                                    <p>Brand</p>
+                                    <input class="prod-info__input" placeholder="Brand Name" type="text" name="brand" required>
+                                </div>
+                                <!-- Product Price -->
+                                <div class="tp-wrapper__price">
+                                    <p>Price</p>
+                                    <div class="price__wrapper">
+                                        <input class="prod-info__input" placeholder="0.00" type="text" name="price" required>
+                                        <select id="currency" name="currency">
+                                      
+                                            <option value="vnd">VND</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Product Description -->
+                            <div class="prod-info__description">
+                                <p>Description <span style="color:#919aa3; font-size: 13px;">(Optional)</span></p>
+                                <textarea class="prod-info__input" placeholder="Type your input" cols="30" rows="10" name="description"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="main__prod-media col-lg-5">
+                    <div class="card">
+                        <div class="card-body border_table">
+                            <h3 class="prod-media__heading">Media</h3>
+                            <div class="border-divider"></div>
+                            <div class="pro-media__upload-wrapper">
+                                <img class="upload-img"  alt="">
+                                <p>Choose file to upload</p>
+                                <input class="input-upfile btn-upfile " type="file" id="input-upfile" name="image" accept="image/*">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+
     <!-- End Main Content Admin Views -->
 	
 	<!-- Start Footer Admin views -->
@@ -406,7 +440,7 @@
         </div>
     </footer>
     
-    <!-- End Footer Admin views -->
+    <
     
     <script src="/aishop/resources/assets/js/general.js"></script>
     <script src="/aishop/resources/assets/js/event-click.js"></script>

@@ -293,15 +293,11 @@
                                         </a>
                                     </li>
                                     <li class="account-option option-link">
-                                        <a class="py-5 option-hover text-dark" style="padding-left: 16px !important;padding-right: 211px !important;" href="#">
-                                            Help
+                                        <a class="py-5 option-hover text-dark" style="padding-left: 16px !important;padding-right: 211px !important;" href="/aishop/logout.htm">
+                                            Signout
                                         </a>
                                     </li>
-                                    <li class="account-option option-link navbar-setting" style="padding: 12px 0 0 0 !important; margin: 0;">
-                                        <a class="py-5 option-hover text-dark" style="padding-left: 16px !important;padding-right: 188px !important;" href="#">
-                                            Sign out
-                                        </a>
-                                    </li>
+                                    
                                 </ul>
                             </div>
                         </div>
@@ -318,7 +314,7 @@
 	        <div class="row align-items-center" style="margin: 15px 0 0 10px;">
 	          <div class="col-sm mb-2 mb-sm-0">
 	            
-	            <h1 class="page-header-title">Good morning, New Name.</h1>
+	            <h1 class="page-header-title">Good morning, Admin.</h1>
 	            
 	            <p class="page-header-text">Here's what's happening with your store today.</p>
 	          </div>

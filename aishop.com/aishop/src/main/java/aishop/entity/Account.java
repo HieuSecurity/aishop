@@ -1,5 +1,4 @@
 package aishop.entity;
-import java.util.Collection;
 
 import javax.persistence.*;
 
@@ -15,14 +14,18 @@ public class Account {
     @Column(name = "password", nullable = false)
     private String password; // Trường password
 
+    @Column(name = "role", nullable = false, columnDefinition = "TINYINT DEFAULT 0")
+    private int role; // Trường role, giá trị mặc định là 0 (user), có thể là 1 (admin)
+
     // Constructor không tham số (bắt buộc cho Hibernate)
     public Account() {
     }
 
     // Constructor đầy đủ tham số
-    public Account(String email, String password) {
+    public Account(String email, String password, int role) {
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 
     // Getter và Setter cho email
@@ -43,5 +46,12 @@ public class Account {
         this.password = password;
     }
 
+    // Getter và Setter cho role
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
 }
-    

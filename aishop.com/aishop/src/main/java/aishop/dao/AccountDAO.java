@@ -48,8 +48,26 @@ public class AccountDAO {
             Query query = session.createQuery(hql);
             query.setParameter("email", email);
             query.setParameter("password", password);
+
+            // Lấy kết quả trả về
+            Account account = (Account) query.uniqueResult();
+
+            // Kiểm tra role sau khi tìm thấy account
+            if (account != null) {
+                Integer role = account.getRole(); // Sử dụng Integer thay vì int
+                if (role != null) {
+                    if (role == 1) {
+                        System.out.println("Role: Admin");
+                    } else if (role == 0) {
+                        System.out.println("Role: User");
+                    } else {
+                        System.out.println("Role: Unknown");
+                    }
+                }
+            }
+
             // Trả về tài khoản nếu tìm thấy, nếu không trả về null
-            return (Account) query.uniqueResult();
+            return account;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -59,6 +77,8 @@ public class AccountDAO {
             }
         }
     }
+
+
     public boolean createAccount(Account account) {
         Session session = null; // vừa thử đẩy lên
         try {

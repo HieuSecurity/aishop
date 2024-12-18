@@ -147,10 +147,7 @@ public class ViewAdmin {
 	        // Trả về view để hiển thị thông tin sản phẩm
 	        return "admin/edit-product";  // Tên file JSP hoặc Thymeleaf mà bạn muốn sử dụng để render
 	    }
-	@RequestMapping(value = "/dashboard")
-	public String dashboard(){
-		return "admin/dashboards";
-	}
+	
 	
 	
 	@RequestMapping(value = "/product-detail")

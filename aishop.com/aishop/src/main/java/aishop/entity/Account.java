@@ -4,10 +4,14 @@ import javax.persistence.*;
 
 // Mapping theo kiểu Hibernate
 @Entity
-@Table(name = "account") // Bảng tương ứng trong cơ sở dữ liệu
+@Table(name = "accounts") // Bảng tương ứng trong cơ sở dữ liệu
 public class Account {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // ID tự động tăng
+    @Column(name = "id")
+    private int id; // Trường id, là khóa chính
+
     @Column(name = "email", nullable = false, unique = true)
     private String email; // Trường email, là khóa chính
 
@@ -22,10 +26,27 @@ public class Account {
     }
 
     // Constructor đầy đủ tham số
+    public Account(int id, String email, String password, int role) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
+    // Constructor không bao gồm ID (dành cho insert)
     public Account(String email, String password, int role) {
         this.email = email;
         this.password = password;
         this.role = role;
+    }
+
+    // Getter và Setter cho id
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     // Getter và Setter cho email

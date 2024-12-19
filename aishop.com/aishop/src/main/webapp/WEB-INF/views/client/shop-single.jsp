@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -137,7 +139,7 @@
              <div class="row d-flex justify-content-between">
                 <div class="prod__section-img col-lg-5 mt-5">
 	                <div class="card mb-3">
-	                    <img class="card-img img-fluid main-img-js" src="/aishop/resources/assets/img/pro-img/Picture1.png" alt="Card image cap" id="product-detail">
+	                    <img class="card-img img-fluid main-img-js" src="/aishop/resources/assets/img/pro-img/${product.image }" alt="Card image cap" id="product-detail">
 	                </div>
 	                <div class="row">
 	                    <!--Start Controls-->
@@ -216,83 +218,79 @@
 	            </div>
                 <div class="prod__section-text col-lg-7 mt-5">
 	                <div class="card">
-                        <div class="card-body text-dark">
-                            <h1 style="margin-top: 0; margin-bottom: 20px;">Kem Lót Maybelline Fit Me Matte + Poreless Kiềm Dầu Spf20 30Ml</h1>
-                            <p style="font-size: 22px;">218,000<span>&#8363;</span></p>
-                            <p class="py-2">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-regular fa-star-half-stroke"></i>
-                                <span class="list-inline-item text-dark">Rating 4.8 | 36 Comments</span>
-                            </p>
-                            <ul class="list-inline">
-	                            <li class="list-inline-item">
-	                                <h6>Brand:</h6>
-	                            </li>
-	                            <li class="list-inline-item">
-	                                <p class="text-muted"><strong>Easy Wear</strong></p>
-	                            </li>
-	                        </ul>
-                            <h6>Description:</h6>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse. Donec condimentum elementum convallis. Nunc sed orci a diam ultrices aliquet interdum quis nulla.</p>
-                            <ul class="list-inline">
-	                            <li class="list-inline-item">
-	                                <h6>Avaliable Color :</h6>
-	                            </li>
-	                            <li class="list-inline-item">
-	                                <p class="text-muted"><strong>White / Black</strong></p>
-	                            </li>
-	                        </ul>
-                            <h6>Specification:</h6>
-                            <ul class="list-unstyled pb-3">
-	                            <li>Lorem ipsum dolor sit</li>
-	                            <li>Amet, consectetur</li>
-	                            <li>Adipiscing elit,set</li>
-	                            <li>Duis aute irure</li>
-	                            <li>Ut enim ad minim</li>
-	                            <li>Dolore magna aliqua</li>
-	                            <li>Excepteur sint</li>
-	                        </ul>
-                            <form action="" method="GET">
-	                            <input type="hidden" name="product-title" value="Activewear">
-	                            <div class="row">
-	                                <!-- <div class="col-auto">
-	                                    <ul class="list-inline pb-3 size-btns-js">
-	                                        <li class="list-inline-item">Size :
-	                                            <input type="hidden" name="product-size" id="product-size" value="S">
-	                                        </li>
-	                                        <li class="list-inline-item"><span class="btn btn-success btn-size">S</span></li>
-	                                        <li class="list-inline-item"><span class="btn btn-success btn-size">M</span></li>
-	                                        <li class="list-inline-item"><span class="btn btn-success btn-size">L</span></li>
-	                                        <li class="list-inline-item"><span class="btn btn-success btn-size">XL</span></li>
-	                                    </ul>
-	                                </div> -->
-	                                <div class="col-auto">
-	                                    <ul class="list-inline pb-3">
-	                                        <li class="list-inline-item text-right">
-	                                            Quantity
-	                                            <input type="hidden" name="product-quanity" id="product-quanity" value="1">
-	                                        </li>
-	                                        <li class="list-inline-item"><span class="btn btn-success" id="btn-minus">-</span></li>
-	                                        <li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>
-	                                        <li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li>
-	                                    </ul>
-	                                </div>
-	                            </div>
-	                            <div class="row">
-	                                <div class="col d-grid">
-	                                    <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Buy</button>
-	                                </div>
-	                                <div class="col d-grid">
-	                                    <button type="submit" class="btn btn-success btn-lg" name="submit" value="addtocard">Add To Cart</button>
-	                                </div>
-	                            </div>
-	                        </form>
-                        </div>
-                    </div>
-	            </div>
+    <div class="card-body text-dark">
+        <h1 style="margin-top: 0; margin-bottom: 20px;">${product.name}</h1>
+        <p style="font-size: 22px;">${product.price}<span>&#8363;</span></p>
+        <p class="py-2">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+        </p>
+        <ul class="list-inline">
+            <li class="list-inline-item">
+                <h6>Brand:</h6>
+            </li>
+            <li class="list-inline-item">
+                <p class="text-muted"><strong>${product.brand}</strong></p>
+            </li>
+        </ul>
+        <h6>Description:</h6>
+        <p>${product.description}</p>
+
+        <!-- Form để thêm vào giỏ hàng -->
+        <form action="addToCart.htm" method="POST">
+    <input type="hidden" name="productId" value="${product.id}" />
+    <div class="row">
+        <div class="col-auto">
+            <ul class="list-inline pb-3">
+                <li class="list-inline-item text-right">
+                    Quantity
+                    <input type="number" name="quantity" id="product-quantity" value="1" min="1">
+                </li>
+                <li class="list-inline-item">
+                    <span class="btn btn-success" id="btn-minus">-</span>
+                </li>
+                <li class="list-inline-item">
+                    <span class="badge bg-secondary" id="var-value">1</span>
+                </li>
+                <li class="list-inline-item">
+                    <span class="btn btn-success" id="btn-plus">+</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col d-grid">
+            <button type="submit" class="btn btn-success btn-lg" name="submit" value="buy">Buy</button>
+        </div>
+        <div class="col d-grid">
+            <button type="submit" class="btn btn-success btn-lg" name="submit" value="addtocart">Add To Cart</button>
+        </div>
+    </div>
+</form>
+
+<script>
+    // JavaScript để thay đổi giá trị quantity khi nhấn nút + hoặc -
+    document.getElementById("btn-plus").addEventListener("click", function() {
+        var quantityInput = document.getElementById("product-quantity");
+        var currentValue = parseInt(quantityInput.value);
+        quantityInput.value = currentValue + 1;
+    });
+
+    document.getElementById("btn-minus").addEventListener("click", function() {
+        var quantityInput = document.getElementById("product-quantity");
+        var currentValue = parseInt(quantityInput.value);
+        if (currentValue > 1) {
+            quantityInput.value = currentValue - 1;
+        }
+    });
+</script>
+
+    </div>
+</div>
+
             </div>
         </div>
     </section>

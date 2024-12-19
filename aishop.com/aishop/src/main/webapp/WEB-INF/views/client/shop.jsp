@@ -18,6 +18,65 @@
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>AIShop</title>
+      <style>
+    /* Đặt vị trí cho biểu tượng */
+/* Định dạng cho phần tử chứa menu */
+.user-menu {
+    position: relative;
+    display: inline-block;
+}
+
+/* Ẩn menu dropdown khi chưa hover */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    width: 180px;
+    display: none; /* Đảm bảo ẩn menu khi chưa hover */
+}
+
+/* Hiển thị menu khi hover vào phần tử cha */
+.user-menu:hover .dropdown-menu {
+    display: block;
+}
+
+/* Định dạng cho các mục trong menu */
+.dropdown-menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Định dạng các mục menu */
+.dropdown-menu li {
+    padding: 5px 10px;
+}
+
+/* Hiển thị liên kết trong menu */
+.dropdown-menu li a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+}
+
+/* Thêm hiệu ứng hover cho các mục menu */
+.dropdown-menu li a:hover {
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+/* Tạo hiệu ứng hover cho các mục */
+.user-menu:hover .dropdown-menu li a {
+    color: #007bff;
+}
+
+    </style>
 </head>
 <body>
 	<header id="header">
@@ -35,13 +94,7 @@
                         </svg>
                         <a class="text-light text-decoration-none">010-020-0340</a>
                     </div>
-                    <div class="my-account-auth">
-                        <div class="p-relative">
-                            <a href="/aishop/dashboard.htm" class="text-light" style="font-size: 14px !important;">Admin</a>
-                            /
-                            <a href="/aishop/sign-up.htm" class="text-light" style="font-size: 14px !important;"> Sign up</a>
-                        </div>
-                    </div>
+                    
                     <div class="d-flex align-items-center">
                         <a class="text-light mx-2" href="https://www.facebook.com/groups/4916586575062018" rel="sponsored">
                             <svg height="1em" viewBox="0 0 320 512">
@@ -121,16 +174,55 @@
                                 <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/>
                             </svg>
                         </a>
-                        <a href="/aishop/cart.htm" class="nav-icon">
+                        <a href="/aishop/cart.htm?customerId=${sessionScope.customerId}" class="nav-icon">
                             <svg height="1em" viewBox="0 0 576 512">
                                 <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/>
                             </svg>
                         </a>
-                        <a href="/aishop/profile-user.htm" class="nav-icon">
-                            <svg height="1em" viewBox="0 0 448 512">
-                                <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
-                            </svg>
-                        </a>
+                        <div class="user-menu">
+    <!-- Biểu tượng người dùng (thẻ <a>) -->
+   
+    <!-- Menu xuất hiện khi hover vào thẻ <a> -->
+  <div class="user-menu">
+   <a href="#" class="nav-icon">
+        <svg height="1em" viewBox="0 0 448 512">
+            <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
+        </svg>
+    </a>
+    <c:choose>
+        <c:when test="${not empty sessionScope.role}">
+            <!-- Hiển thị menu khi người dùng đã đăng nhập -->
+            <div class="dropdown-menu">
+                <ul>
+                    <li>
+                        <c:choose>
+                            <c:when test="${role == 1}">
+                                <a href="/aishop/admin/dashboard.htm">Quản lý thông tin</a>
+                            </c:when>
+                            <c:when test="${role == 0}">
+                                <a href="/aishop/client/dashboard.htm">Quản lý thông tin</a>
+                            </c:when>
+                            <c:otherwise>
+                                <a href="#">Quản lý thông tin</a>
+                            </c:otherwise>
+                        </c:choose>
+                    </li>
+                    <li><a href="/aishop/logout.htm">Đăng xuất</a></li>
+                </ul>
+            </div>
+        </c:when>
+        <c:otherwise>
+            <!-- Hiển thị thông báo nếu chưa đăng nhập -->
+            <div class="dropdown-menu">
+                <ul>
+                    <li><a href="/aishop/sign-in.htm">Đăng nhập</a></li>
+                </ul>
+            </div>
+        </c:otherwise>
+    </c:choose>
+</div>
+
+</div>
                     </div>
                 </div>
             </div>

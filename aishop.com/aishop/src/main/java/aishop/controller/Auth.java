@@ -54,16 +54,18 @@ public class Auth {
 	     Account account = accountDAO.getAccountByEmailAndPassword(email, password);
 
 	     if (account != null) {
-	         // Lưu tài khoản và role vào session
-	         session.setAttribute("user", account);
+	         // Lưu tài khoản, vai trò và customer_id vào session
+	         session.setAttribute("user", account);  // Lưu thông tin người dùng
 	         session.setAttribute("role", account.getRole()); // Lưu vai trò (Admin, User, etc.)
-	         
+	         session.setAttribute("customerId", account.getId());  // Lưu customer_id để lấy giỏ hàng
+
 	         return "redirect:/";  // Chuyển hướng về trang chủ
 	     } else {
 	         model.addAttribute("error", "Email hoặc mật khẩu không đúng");
 	         return "auth/sign-in";  // Quay lại trang đăng nhập
 	     }
 	 }
+
 
 	 @RequestMapping(value = "/", method = RequestMethod.GET)
 	 public String checkSession(HttpSession session, Model model) {

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +16,72 @@
 	
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
     <title>AIShop</title>
+    
+    <style>
+    /* Định dạng toàn bộ bảng */
+.table {
+    width: 100%;
+    border-collapse: collapse; /* Loại bỏ khoảng cách giữa các ô */
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+}
+
+/* Định dạng tiêu đề bảng */
+.table thead th {
+    color: #ffffff;           /* Màu chữ */
+    padding: 12px;            /* Khoảng cách bên trong ô */
+    font-weight: bold;
+    border: 1px solid #ddd;   /* Đường viền */
+}
+
+/* Định dạng ô dữ liệu */
+.table tbody td {
+    padding: 12px;            /* Khoảng cách bên trong ô */
+    border: 1px solid #ddd;   /* Đường viền */
+    vertical-align: middle;
+    font-size:15px;
+    font-weight:700;   /* Canh giữa theo chiều dọc */
+}
+
+/* Định dạng hàng dữ liệu */
+.table tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* Màu nền xen kẽ */
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: #ffffff; /* Màu nền xen kẽ */
+}
+
+/* Hiệu ứng hover cho hàng */
+.table tbody tr:hover {
+    background-color: #f1f1f1; /* Màu khi rê chuột */
+}
+
+/* Định dạng nút xóa */
+.btn-danger {
+    background-color: #ff4d4d; /* Màu nền */
+    color: white;              /* Màu chữ */
+    padding: 6px 12px;         /* Khoảng cách bên trong nút */
+    border: none;              /* Loại bỏ viền */
+    border-radius: 4px;        /* Bo góc */
+    cursor: pointer;           /* Thay đổi con trỏ chuột */
+    font-size: 14px;
+    transition: background-color 0.3s ease; /* Hiệu ứng khi hover */
+}
+
+/* Hiệu ứng hover cho nút xóa */
+.btn-danger:hover {
+    background-color: #e60000; /* Màu nền khi rê chuột */
+}
+
+/* Định dạng cột trống cuối cùng */
+.table tbody td:last-child {
+    width: 1%;
+    white-space: nowrap; /* Giữ nút nhỏ gọn, không bị giãn */
+}
+    
+    </style>
 </head>
 <body>
 	<header id="header">
@@ -163,21 +231,44 @@
 	                            </div>
 	                            <div class="cart-block">
 	                                <div class="cart-info table-responsive">
-	                                    <table class="table product-list">
-	                                        <thead>
-	                                            <tr>
-	                                                <th>Sản phẩm</th>
-	                                                <th>Đơn giá</th>
-	                                                <th>Số lượng</th>
-	                                                <th>Thành tiền</th>
-	                                                <th>Thao tác</th>
-	                                                <th></th>
-	                                            </tr>
-	                                        </thead>
-	                                        <tbody>
-	                                           
-	                                        </tbody>
-	                                    </table>
+	                                    <c:if test="${not empty error}">
+        <div style="color: red;">${error}</div>
+    </c:if>
+
+    <c:if test="${not empty carts}">
+        <table class="table product-list">
+    <thead>
+        <tr>
+            <th>Sản phẩm</th>
+            <th>Đơn giá</th>
+            <th>Số lượng</th>
+            <th>Thành tiền</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        <c:forEach var="cart" items="${carts}">
+            <tr>
+                <!-- Hiển thị tên sản phẩm -->
+                <td>${cart.product.name}</td>
+                <!-- Hiển thị đơn giá sản phẩm -->
+                <td>${cart.product.price}₫</td>
+                <!-- Hiển thị số lượng sản phẩm trong giỏ -->
+                <td>${cart.quantity}</td>
+                <!-- Hiển thị thành tiền (đơn giá * số lượng) -->
+                <td>${cart.product.price * cart.quantity}₫</td>
+                <!-- Thao tác Xóa -->
+                <td>
+                    <form action="deleteCart.htm" method="POST">
+                        <input type="hidden" name="cartId" value="${cart.id}" />
+                        <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
+                    </form>
+                </td>
+            </tr>
+        </c:forEach>
+    </tbody>
+</table>
+    </c:if>
 	                                </div>
 	                                <div class="clearfix text-right">
 	                                    <span"><b style="margin-bottom: 7px;">Tổng thanh toán:</b></span>

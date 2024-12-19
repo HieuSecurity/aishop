@@ -86,7 +86,11 @@ public class ViewClient {
 	 @RequestMapping(value = "deleteCart.htm", method = RequestMethod.POST)
 	    public String deleteCart(@RequestParam("cartId") int cartId, HttpSession session, Model model) {
 	        
-	       
+	        // Kiểm tra người dùng đã đăng nhập hay chưa
+	        Account customer = (Account) session.getAttribute("user");
+	        if (customer == null) {
+	            return "auth/sign-in";  // Nếu chưa đăng nhập, chuyển hướng đến trang đăng nhập
+	        }
 
 	        // Gọi phương thức deleteCart từ DAO
 	        boolean isDeleted = cartDAO.deleteCart(cartId);

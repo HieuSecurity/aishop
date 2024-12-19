@@ -35,6 +35,15 @@
     border: 1px solid #ddd;   /* Đường viền */
 }
 
+
+/* Làm cho checkbox lớn hơn */
+input[type="checkbox"] {
+    width: 18px;   /* Thay đổi kích thước chiều rộng */
+    height: 18px;  /* Thay đổi kích thước chiều cao */
+    transform: scale(1.5);
+    margin-top:10px;
+      /* Tăng kích thước lên 1.5 lần */
+}
 /* Định dạng ô dữ liệu */
 .table tbody td {
     padding: 12px;            /* Khoảng cách bên trong ô */
@@ -61,6 +70,16 @@
 /* Định dạng nút xóa */
 .btn-danger {
     background-color: #ff4d4d; /* Màu nền */
+    color: white;              /* Màu chữ */
+    padding: 6px 12px;         /* Khoảng cách bên trong nút */
+    border: none;              /* Loại bỏ viền */
+    border-radius: 4px;        /* Bo góc */
+    cursor: pointer;           /* Thay đổi con trỏ chuột */
+    font-size: 14px;
+    transition: background-color 0.3s ease; /* Hiệu ứng khi hover */
+}
+.btn-select {
+    background-color: #7aaedd; /* Màu nền */
     color: white;              /* Màu chữ */
     padding: 6px 12px;         /* Khoảng cách bên trong nút */
     border: none;              /* Loại bỏ viền */
@@ -99,13 +118,7 @@
                         </svg>
                         <a class="text-light text-decoration-none">010-020-0340</a>
                     </div>
-                    <div class="my-account-auth">
-                        <div class="p-relative">
-                            <a href="/aishop/dashboards.htm" class="text-light" style="font-size: 14px !important;">Admin</a>
-                            /
-                            <a href="/aishop/sign-up.htm" class="text-light" style="font-size: 14px !important;"> Sign up</a>
-                        </div>
-                    </div>
+                    
                     <div class="d-flex align-items-center">
                         <a class="text-light mx-2" href="https://www.facebook.com/groups/4916586575062018" rel="sponsored">
                             <svg height="1em" viewBox="0 0 320 512">
@@ -190,11 +203,7 @@
                                 <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/>
                             </svg>
                         </a>
-                        <a href="/aishop/profile-user.htm" class="nav-icon">
-                            <svg height="1em" viewBox="0 0 448 512">
-                                <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
-                            </svg>
-                        </a>
+                       
                     </div>
                 </div>
             </div>
@@ -244,39 +253,42 @@
             <th>Số lượng</th>
             <th>Thành tiền</th>
             <th>Thao tác</th>
+            <th>Chọn</th>
         </tr>
     </thead>
     <tbody>
         <c:forEach var="cart" items="${carts}">
             <tr>
-                <!-- Hiển thị tên sản phẩm -->
                 <td>${cart.product.name}</td>
-                <!-- Hiển thị đơn giá sản phẩm -->
-                <td>${cart.product.price}₫</td>
-                <!-- Hiển thị số lượng sản phẩm trong giỏ -->
-                <td>${cart.quantity}</td>
-                <!-- Hiển thị thành tiền (đơn giá * số lượng) -->
-                <td>${cart.product.price * cart.quantity}₫</td>
-                <!-- Thao tác Xóa -->
+                <td class="product-price">${cart.product.price}₫</td> <!-- Đơn giá sản phẩm -->
+                <td class="product-quantity">${cart.quantity}</td> <!-- Số lượng sản phẩm -->
+                <td>${cart.product.price * cart.quantity}₫</td> <!-- Thành tiền -->
                 <td>
                     <form action="deleteCart.htm" method="POST">
                         <input type="hidden" name="cartId" value="${cart.id}" />
-                        <button type="submit" class="btn btn-danger btn-sm">Xóa</button>
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirmDelete()">Xóa</button>
                     </form>
+                </td>
+                <td>
+                    <input type="checkbox" name="cartId" value="${cart.id}" />
                 </td>
             </tr>
         </c:forEach>
     </tbody>
 </table>
+
+    
+
     </c:if>
 	                                </div>
-	                                <div class="clearfix text-right">
-	                                    <span"><b style="margin-bottom: 7px;">Tổng thanh toán:</b></span>
-	                                    <span class="pay-price ng-binding" style="color: #0202aa; font-weight: 400;">
-	                                    </span>
-	                                </div>
+							                             <div class="clearfix text-right">
+							<span><b style="margin-bottom: 7px;">Tổng thanh toán:</b></span>
+							<span class="pay-price ng-binding" style="color: #0202aa; font-weight: 400;">
+							    0₫
+							</span> <!-- Tổng thanh toán sẽ hiển thị tại đây -->
+							</div>
 	                                <div class="button text-right" style="display: flex; justify-content: flex-end; align-items: center;">
-	                                    <a class="btn btn-default text-dark" href="/shop" onclick="window.history.back()">Tiếp tục mua hàng</a>
+	                                    <a class="btn btn-default text-dark" href="/aishop/shop.htm" onclick="window.history.back()">Tiếp tục mua hàng</a>
 	                                    <form class="button button-secondary btn--hover" style="height: 32px; margin: 0 5px 0 9px;" method="post">
 	                                        <button class="btn button button-secondary btn--hover" style="height: 100%; padding: 0 5px 0 5px;" name="pay-cart">Tiến hành thanh toán</button>
 	                                    </form>
@@ -385,6 +397,37 @@
             </div>
         </div>
     </footer>
+     <script>
+    // JavaScript để hiển thị hộp thoại xác nhận khi click vào nút xóa
+    function confirmDelete() {
+        return confirm("Bạn có chắc chắn muốn xóa không?");
+    }
+ // Hàm tính tổng tiền
+    function calculateTotal() {
+        var total = 0;  // Khởi tạo tổng bằng 0
+        var checkboxes = document.querySelectorAll("input[name='cartId']:checked"); // Lấy tất cả checkbox được chọn
+
+        checkboxes.forEach(function(checkbox) {
+            // Lấy thông tin của sản phẩm từ checkbox được chọn
+            var productRow = checkbox.closest('tr'); // Tìm dòng của sản phẩm
+            var price = parseInt(productRow.querySelector('.product-price').textContent.replace('₫', '').trim()); // Đơn giá sản phẩm
+            var quantity = parseInt(productRow.querySelector('.product-quantity').textContent.trim()); // Số lượng sản phẩm
+            total += price * quantity;  // Cộng dồn vào tổng
+        });
+
+        // Cập nhật tổng tiền vào phần tử .pay-price
+        document.querySelector('.pay-price').textContent = total.toLocaleString() + '₫';
+    }
+
+    // Gắn sự kiện cho checkbox để tính lại tổng khi người dùng thay đổi lựa chọn
+    document.querySelectorAll("input[name='cartId']").forEach(function(checkbox) {
+        checkbox.addEventListener('change', calculateTotal);
+    });
+
+    // Khởi động tính toán khi trang được load
+    window.onload = calculateTotal;
+
+    </script>
     <script src="/aishop/resources/assets/js/style.js"></script>
 </body>
 </html>

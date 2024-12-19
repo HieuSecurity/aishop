@@ -31,13 +31,7 @@
                     </svg>
                     <a class="text-light text-decoration-none">010-020-0340</a>
                 </div>
-                <div class="my-account-auth">
-                    <div class="p-relative">
-                        <a href="/aishop/sign-in.htm" class="text-light" style="font-size: 14px !important;">Sign in </a>
-                        /
-                        <a href="/aishop/sign-up.htm" class="text-light" style="font-size: 14px !important;"> Sign up</a>
-                    </div>
-                </div>
+               
                 <div class="d-flex align-items-center">
                     <a class="text-light mx-2" href="https://www.facebook.com/groups/4916586575062018" rel="sponsored">
                         <svg height="1em" viewBox="0 0 320 512">
@@ -122,11 +116,7 @@
                             <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/>
                         </svg>
                     </a>
-                    <a href="/aishop/profile-user.htm" class="nav-icon">
-                        <svg height="1em" viewBox="0 0 448 512">
-                            <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
-                        </svg>
-                    </a>
+                   
                 </div>
             </div>
         </div>
@@ -220,7 +210,7 @@
 	                <div class="card">
     <div class="card-body text-dark">
         <h1 style="margin-top: 0; margin-bottom: 20px;">${product.name}</h1>
-        <p style="font-size: 22px;">${product.price}<span>&#8363;</span></p>
+        <p  style="color: #ff6600 !important; font-size: 22px !important;font-weight:700 !important">${product.price}<span>&#8363;</span></p>
         <p class="py-2">
             <i class="fa-solid fa-star"></i>
             <i class="fa-solid fa-star"></i>

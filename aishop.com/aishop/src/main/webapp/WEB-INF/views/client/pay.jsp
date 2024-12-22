@@ -290,9 +290,10 @@
                                                     <div class="total-payment">
                                                         Thanh toán <span class="ng-binding"></span>
                                                     </div>
-                                                    <div class="button-submit">
-                                                        <button name="order-submit" class="btn button button-secondary" type="submit">Đặt hàng</button>
-                                                    </div>
+                                   				 <div class="">
+												    <a href="/aishop/pay-confirm.htm" class="btn button button-secondary">Đặt hàng</a>
+												</div>
+
                                                 </div>
                                             </div>
                                         </div>

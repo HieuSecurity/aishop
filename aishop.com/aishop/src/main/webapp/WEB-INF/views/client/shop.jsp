@@ -83,6 +83,53 @@ font-size:20px;
 .user-menu:hover .dropdown-menu li a {
     color: #007bff;
 }
+/* Đảm bảo các card sản phẩm có chiều cao đồng nhất */
+.content__single-prod {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Chiều cao cố định để căn chỉnh nội dung */
+}
+
+/* Hình ảnh card luôn cùng chiều cao */
+.single-prod__img img {
+    max-height: 200px; /* Điều chỉnh chiều cao tối đa cho hình ảnh */
+    object-fit: cover; /* Giữ tỷ lệ hình ảnh */
+    width: 100%; /* Đảm bảo hình ảnh chiếm toàn bộ chiều ngang */
+}
+
+/* Nội dung card (phần text) */
+.single-prod__text ul {
+    display: flex;
+    flex-direction: column; /* Các field nằm dọc */
+    justify-content: space-between; /* Phân chia đều các field */
+    height: 100%; /* Nội dung card chiếm toàn bộ chiều cao còn lại */
+}
+
+/* Tên sản phẩm */
+.text__product {
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 10px; /* Khoảng cách giữa tên sản phẩm và các phần khác */
+}
+
+/* Giá sản phẩm */
+.item-card:last-child {
+    color: #ff6600; /* Màu sắc giá */
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+    margin-top: auto; /* Đẩy giá xuống cuối */
+}
+
+/* Đảm bảo bố cục tổng thể đồng nhất */
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
 
     </style>
 </head>
@@ -227,10 +274,10 @@ font-size:20px;
 					           <i class="fa-solid fa-star"></i>
 					           <i class="fa-solid fa-star"></i>
 					       </p>
-                                    <li class="item-card">
-                                        <a href="/aishop/shop-single.htm?id=${product.id}" class="text-decoration-none text__product">${product.name}</a>
+                                    <li style="margin-top:-50px">
+                                        <a  href="/aishop/shop-single.htm?id=${product.id}" class="text-decoration-none text__product">${product.name}</a>
                                     </li>
-                                    <li style="color: #ff6600 !important; font-size: 22px !important;font-weight:700 !important" class="item-card">${product.price}₫</li>
+                                    <li style="color: #ff6600 !important; font-size: 22px !important;font-weight:700 !important;margin-top:-50px" >${product.price}₫</li>
                                 </ul>
              
                             </div>

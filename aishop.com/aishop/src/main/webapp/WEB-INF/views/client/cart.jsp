@@ -38,10 +38,11 @@
 
 /* Làm cho checkbox lớn hơn */
 input[type="checkbox"] {
-    width: 18px;   /* Thay đổi kích thước chiều rộng */
-    height: 18px;  /* Thay đổi kích thước chiều cao */
+    width: 15px;   /* Thay đổi kích thước chiều rộng */
+    height: 15px;  /* Thay đổi kích thước chiều cao */
     transform: scale(1.5);
     margin-top:10px;
+    margin-left:15px;
       /* Tăng kích thước lên 1.5 lần */
 }
 /* Định dạng ô dữ liệu */
@@ -235,7 +236,7 @@ input[type="checkbox"] {
 	                                <ul class="clearfix_check" style="display: flex;">
 	                                    <li class="cart active col-md-2 col-xs-12 col-sm-4 col-md-offset-3 col-sm-offset-0 col-xs-offset-0"><span><i class="fa fa-shopping-cart"></i></span><span style="color: #7aaedd; font-size: 15px; font-weight: 500;">Giỏ hàng của tôi</span><span class="step-number"><a>1</a></span></li>
 	                                    <li class="payment col-md-2 col-xs-12 col-sm-4"><span><i class="fa fa-credit-card" aria-hidden="true"></i></span><span style="font-size: 15px;font-weight: 500;">Thanh toán</span><span class="step-number"><a>2</a></span></li>
-	                                    <li class="finish col-md-2 col-xs-12 col-sm-4"><span><i class="fa fa-check"></i></span><span style="font-size: 15px;font-weight: 500;">Hoàn tất</span><span class="step-number"><a>3</a></span></li>
+	            
 	                                </ul>
 	                            </div>
 	                            <div class="cart-block">
@@ -289,9 +290,17 @@ input[type="checkbox"] {
 							</div>
 	                                <div class="button text-right" style="display: flex; justify-content: flex-end; align-items: center;">
 	                                    <a class="btn btn-default text-dark" href="/aishop/shop.htm" onclick="window.history.back()">Tiếp tục mua hàng</a>
-	                                    <form class="button button-secondary btn--hover" style="height: 32px; margin: 0 5px 0 9px;" method="post">
-	                                        <button class="btn button button-secondary btn--hover" style="height: 100%; padding: 0 5px 0 5px;" name="pay-cart">Tiến hành thanh toán</button>
-	                                    </form>
+	                                    <form class="button button-secondary btn--hover" 
+      style="height: 32px; margin: 0 5px 0 9px;" 
+      method="post" 
+      action="/aishop/pay-confirm.htm">
+    <button class="btn button button-secondary btn--hover" 
+            style="height: 100%; padding: 0 5px 0 5px;" 
+            name="pay-cart">
+        Tiến hành thanh toán
+    </button>
+</form>
+
 	                                </div>
 	                            </div>
 	                        </div>

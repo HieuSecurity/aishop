@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +16,91 @@
 
     <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
     <title>AIShop</title>
+     <style>
+    /* Định dạng toàn bộ bảng */
+.table {
+    width: 100%;
+    border-collapse: collapse; /* Loại bỏ khoảng cách giữa các ô */
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+}
+
+/* Định dạng tiêu đề bảng */
+.table thead th {
+    color: #ffffff;           /* Màu chữ */
+    padding: 12px;            /* Khoảng cách bên trong ô */
+    font-weight: bold;
+    border: 1px solid #ddd;   /* Đường viền */
+}
+
+
+/* Làm cho checkbox lớn hơn */
+input[type="checkbox"] {
+    width: 15px;   /* Thay đổi kích thước chiều rộng */
+    height: 15px;  /* Thay đổi kích thước chiều cao */
+    transform: scale(1.5);
+    margin-top:10px;
+    margin-left:15px;
+      /* Tăng kích thước lên 1.5 lần */
+}
+/* Định dạng ô dữ liệu */
+.table tbody td {
+    padding: 12px;            /* Khoảng cách bên trong ô */
+    border: 1px solid #ddd;   /* Đường viền */
+    vertical-align: middle;
+    font-size:15px;
+    font-weight:700;   /* Canh giữa theo chiều dọc */
+}
+
+/* Định dạng hàng dữ liệu */
+.table tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* Màu nền xen kẽ */
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: #ffffff; /* Màu nền xen kẽ */
+}
+
+/* Hiệu ứng hover cho hàng */
+.table tbody tr:hover {
+    background-color: #f1f1f1; /* Màu khi rê chuột */
+}
+
+/* Định dạng nút xóa */
+.btn-danger {
+    background-color: #ff4d4d; /* Màu nền */
+    color: white;              /* Màu chữ */
+    padding: 6px 12px;         /* Khoảng cách bên trong nút */
+    border: none;              /* Loại bỏ viền */
+    border-radius: 4px;        /* Bo góc */
+    cursor: pointer;           /* Thay đổi con trỏ chuột */
+    font-size: 14px;
+    transition: background-color 0.3s ease; /* Hiệu ứng khi hover */
+}
+.btn-select {
+    background-color: #7aaedd; /* Màu nền */
+    color: white;              /* Màu chữ */
+    padding: 6px 12px;         /* Khoảng cách bên trong nút */
+    border: none;              /* Loại bỏ viền */
+    border-radius: 4px;        /* Bo góc */
+    cursor: pointer;           /* Thay đổi con trỏ chuột */
+    font-size: 14px;
+    transition: background-color 0.3s ease; /* Hiệu ứng khi hover */
+}
+
+/* Hiệu ứng hover cho nút xóa */
+.btn-danger:hover {
+    background-color: #e60000; /* Màu nền khi rê chuột */
+}
+
+/* Định dạng cột trống cuối cùng */
+.table tbody td:last-child {
+    width: 1%;
+    white-space: nowrap; /* Giữ nút nhỏ gọn, không bị giãn */
+}
+    
+    </style>
 </head>
 <body>
 	<header id="header">
@@ -154,7 +241,7 @@
                                     </ul>
                                 </div>
                                 <div class="cart-content ng-scope" ng-controller="orderController" ng-init="initOrderCartController()">
-                                    <h1 class="title"><span>GIỎ HÀNG CỦA TÔI</span></h1>
+                                    <h1 class="title"><span>THANH TOÁN</span></h1>
                                     <div class="steps clearfix">
                                         <ul class="clearfix_check" style="display: flex;">
                                             <li class="cart active col-md-2 col-xs-12 col-sm-4 col-md-offset-3 col-sm-offset-0 col-xs-offset-0" style="padding: 0 60px;">
@@ -171,35 +258,51 @@
                                                 <span style="color: #7aaedd; font-size: 17px; font-weight: 500;">Thanh toán</span>
                                                 <span class="step-number"><a>2</a></span>
                                             </li>
-                                            <li class="finish active col-md-2 col-xs-12 col-sm-4" style="padding: 0 60px;">
-                                                <span>
-                                                    <i class="fa fa-check"></i>
-                                                </span>
-                                                <span style="color: #7aaedd; font-size: 17px; font-weight: 500;">Hoàn tất</span>
-                                                <span class="step-number"><a>3</a></span>
-                                        
-                                            </li>
+                                          
                                         </ul>
                                     </div>
                                     <span><h2 class="title">1. Thông tin sản phẩm</h2></span>
                                     <div class="cart-block">
                                         <div class="cart-info table-responsive">
-                                            <table class="table product-list">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Sản phẩm</th>
-                                                        <th>Đơn giá</th>
-                                                        <th>Số lượng</th>
-                                                        <th>Thành tiền</th>
-                                                        <th>Thao tác</th>
-                                                        <th></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
+	                                    <c:if test="${not empty error}">
+        <div style="color: red;">${error}</div>
+    </c:if>
+
+    <c:if test="${not empty carts}">
+        <table class="table product-list">
+    <thead>
+        <tr>
+            <th>Sản phẩm</th>
+            <th>Đơn giá</th>
+            <th>Số lượng</th>
+            <th>Thành tiền</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+   <tbody>
+    <c:forEach var="cart" items="${carts}">
+        <tr>
+            <!-- Hiển thị tên sản phẩm -->
+            <td>${cart.product.name}</td>
+            <!-- Hiển thị đơn giá sản phẩm -->
+            <td class="product-price">${cart.product.price}₫</td>
+            <!-- Hiển thị số lượng sản phẩm -->
+            <td class="product-quantity">${cart.quantity}</td>
+            <!-- Hiển thị thành tiền -->
+            <td>${cart.product.price * cart.quantity}₫</td>
+            <!-- Checkbox để chọn sản phẩm -->
+            <td>
+                <input type="checkbox" name="cartId" value="${cart.id}"  />
+            </td>
+        </tr>
+    </c:forEach>
+</tbody>
+</table>
+
+    
+
+    </c:if>
+	                                </div>
                                     <span><h2 class="title">2. Thông tin thanh toán</h2></span>
                                     <form method="post" style="margin-bottom: 25px;" class="payment-block clearfix ng-pristine ng-invalid ng-invalid-required ng-valid-email d-flex justify-content-around" id="checkout-container">
                                         <div class="col-md-4 col-sm-12 col-xs-12 payment-step step2">
@@ -301,14 +404,12 @@
                                                 <div class="cart-info">
                                                     <div class="cart-items">
                                                     </div>
-                                                    <div class="total-payment">
-                                                        Thành tiền  <span class="ng-binding"></span>
-                                                    </div>
+                                                 
                                                     <div class="total-payment">
                                                         Phí vận chuyển  <span class="ng-binding">0 ₫</span>
                                                     </div>
                                                     <div class="total-payment">
-                                                        Thanh toán <span class="ng-binding"></span>
+                                                        Tổng Thanh toán <span class="pay-price ng-binding"  style="color: #0202aa; font-weight: 400;">0 ₫</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -408,6 +509,35 @@
     </footer>
 
     <!-- End Footer-->
+   <script>
+    // Hàm tính tổng tiền và cập nhật vào .pay-price
+    function calculateTotal() {
+        let total = 0; // Khởi tạo tổng bằng 0
+        // Lấy tất cả checkbox được chọn
+        const checkboxes = document.querySelectorAll("input[name='cartId']:checked");
+
+        // Lặp qua từng checkbox và tính toán tổng tiền
+        checkboxes.forEach(function (checkbox) {
+            const productRow = checkbox.closest('tr'); // Dòng của sản phẩm
+            const price = parseInt(productRow.querySelector('.product-price').textContent.replace('₫', '').trim()); // Lấy đơn giá
+            const quantity = parseInt(productRow.querySelector('.product-quantity').textContent.trim()); // Lấy số lượng
+            total += price * quantity; // Tính tổng
+        });
+
+        // Cập nhật tổng tiền vào phần tử .pay-price
+        const payPriceElement = document.querySelector('.total-payment .pay-price');
+        payPriceElement.textContent = total.toLocaleString('vi-VN') + ' ₫';
+    }
+
+    // Gắn sự kiện thay đổi cho tất cả checkbox
+    document.querySelectorAll("input[name='cartId']").forEach(function (checkbox) {
+        checkbox.addEventListener('change', calculateTotal); // Khi checkbox thay đổi, gọi hàm tính tổng
+    });
+
+    // Tính toán tổng khi trang được tải
+    window.onload = calculateTotal;
+</script>
+
     <script src="/aishop/resources/assets/js/style.js"></script>
 </body>
 </html>

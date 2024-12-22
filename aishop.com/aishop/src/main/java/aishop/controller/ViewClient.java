@@ -30,6 +30,7 @@ public class ViewClient {
 	    Integer customerId = (Integer) session.getAttribute("customerId");
 	    Account customer = (Account) session.getAttribute("user");
         System.out.println((Account) session.getAttribute("user"));
+        System.out.println(customerId);
 
 	    if (customerId == null) {
 	       
@@ -170,15 +171,33 @@ public class ViewClient {
 	
 	
 	
-	@RequestMapping(value = "/pay")
-	public String pay(){
-		return "client/pay";
+	@RequestMapping(value = "/pay-confirm")
+	public String getAllCartsforPay(HttpSession session, Model model) {
+	    // Lấy customerId từ session
+	    Integer customerId = (Integer) session.getAttribute("customerId");
+	    Account customer = (Account) session.getAttribute("user");
+        System.out.println((Account) session.getAttribute("user"));
+        System.out.println(customerId);
+        
+
+	    if (customerId == null) {
+	       
+	        return "auth/sign-in";  // Chuyển hướng đến trang đăng nhập nếu không có customerId trong session
+	    }
+
+	    // Lấy danh sách Cart cho customerId từ CartDAO
+	    List<Cart> carts = cartDAO.getAllCartsByCustomerId(customerId);
+
+	    if (carts == null || carts.isEmpty()) {
+	        model.addAttribute("error", "Không có sản phẩm nào trong giỏ hàng !");
+	    } else {
+	        model.addAttribute("carts", carts);
+	    }
+
+	    return "client/pay-confirm";  // View hiển thị danh sách giỏ hàng
 	}
 	
-	@RequestMapping(value = "/pay-confirm")
-	public String pay_confirm(){
-		return "client/pay-confirm";
-	}
+	
 	
 	@RequestMapping(value = "/profile-user")
 	public String profile_user(){

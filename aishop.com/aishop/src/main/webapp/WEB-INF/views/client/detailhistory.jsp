@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
     
 <!DOCTYPE html>
 <html>
@@ -231,21 +233,14 @@ input[type="checkbox"] {
 	                            </ul>
 	                        </div>
 	                        <div class="cart-content ng-scope" ng-controller="orderController" ng-init="initOrderCartController()">
-	                            <h1 class="title"><span>GIỎ HÀNG CỦA TÔI</span></h1>
-	                            <div class="steps clearfix">
-	                                <ul class="clearfix_check" style="display: flex;">
-	                                    <li class="cart active col-md-2 col-xs-12 col-sm-4 col-md-offset-3 col-sm-offset-0 col-xs-offset-0"><span><i class="fa fa-shopping-cart"></i></span><span style="color: #7aaedd; font-size: 15px; font-weight: 500;">Giỏ hàng của tôi</span><span class="step-number"><a>1</a></span></li>
-	                                    <li class="payment col-md-2 col-xs-12 col-sm-4"><span><i class="fa fa-credit-card" aria-hidden="true"></i></span><span style="font-size: 15px;font-weight: 500;">Thanh toán</span><span class="step-number"><a>2</a></span></li>
-	            
-	                                </ul>
-	                            </div>
+	                            
 	                            <div class="cart-block">
 	                                <div class="cart-info table-responsive">
-	     <c:if test="${not empty cartError}">
-    <div style="color: red;">${cartError}</div>  <!-- Hiển thị thông báo lỗi nếu có -->
-</c:if>
+	                                    <c:if test="${not empty error}">
+        <div style="color: red;">${error}</div>
+    </c:if>
 
-    <c:if test="${not empty carts}">
+
         <table class="table product-list">
     <thead>
         <tr>
@@ -253,25 +248,16 @@ input[type="checkbox"] {
             <th>Đơn giá</th>
             <th>Số lượng</th>
             <th>Thành tiền</th>
-            <th>Thao tác</th>
+           
         </tr>
     </thead>
     <tbody>
-        <c:forEach var="cart" items="${carts}">
+          <c:forEach var="orderDetail" items="${orderDetails}">
             <tr>
-                <td>${cart.product.name}</td>
-                <td class="product-price">${cart.product.price}₫</td> <!-- Đơn giá sản phẩm -->
-                <td class="product-quantity">${cart.quantity}</td> <!-- Số lượng sản phẩm -->
-                <td>${cart.product.price * cart.quantity}₫</td> <!-- Thành tiền -->
-                <td>
-                    <form action="deleteCart.htm" method="POST">
-                        <input type="hidden" name="cartId" value="${cart.id}" />
-                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirmDelete()">Xóa</button>
-                    </form>
-                </td>
-                <td>
-                    <input style="display:none" type="checkbox" name="cartId" value="${cart.id}" />
-                </td>
+                <td>${orderDetail.product.name}</td>
+                <td>${orderDetail.product.price}</td>
+                <td>${orderDetail.quantity}</td>
+                <td>${orderDetail.quantity * orderDetail.product.price}</td>
             </tr>
         </c:forEach>
     </tbody>
@@ -279,73 +265,12 @@ input[type="checkbox"] {
 
     
 
-    </c:if>
+   
 	                                </div>
-							                             <div style="display:none" class="clearfix text-right">
-							<span><b style="margin-bottom: 7px;">Tổng thanh toán:</b></span>
-							<span class="pay-price ng-binding" style="color: #0202aa; font-weight: 400;">
-							    0₫
-							</span> <!-- Tổng thanh toán sẽ hiển thị tại đây -->
-							</div>
-	                                <div class="button text-right" style="display: flex; justify-content: flex-end; align-items: center;">
-	                                    <a class="btn btn-default text-dark" href="/aishop/shop.htm" onclick="window.history.back()">Tiếp tục mua hàng</a>
-	                                    <form class="button button-secondary btn--hover" 
-      style="height: 32px; margin: 0 5px 0 9px;" 
-      method="post" 
-      action="/aishop/pay-confirm.htm">
-    <button class="btn button button-secondary btn--hover" 
-            style="height: 100%; padding: 0 5px 0 5px;" 
-            name="pay-cart">
-        Tiến hành thanh toán
-    </button>
-</form>
-
-	                                </div>
-	                            </div>
+							                             
+	                               
 	                        </div>
-	                        <div class="cart-content ng-scope" ng-controller="orderController" ng-init="initOrderCartController()">
-	                            <h1 class="title"><span>LỊCH SỬ ĐƠN HÀNG</span></h1>
-	                            <div class="steps clearfix">
-	                            </div>
-	                            <div class="cart-block">
-    <div class="cart-info table-responsive">
-        <table class="table product-list">
-            <thead style="background-color: #354d82 !important;">
-                <tr>
-                    <th>Số thứ tự</th>
-                    <th>Trạng thái</th>
-                    <th>Ngày đặt hàng</th>
-                    <th>Địa chỉ nhận hàng</th>
-                    <th>Thành tiền</th>
-                    <th>Thao tác</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach var="order" items="${orders}">
-                    <tr>
-                        <td>${order.id}</td>
-                        <td>Mua thành công</td>
-                        <td>${order.date}</td>
-                        <td>${order.address}</td>
-                        <td>${order.total}</td>
-                        <td>
-                            <!-- Add any action buttons if needed, for example: -->
-<button class="btn btn-primary" style="color:black;">
-                <a href="/aishop/detailhistory.htm?orderId=${order.id}">Xem chi tiết</a>
-            </button>                        </td>
-                        <td>
-                            <!-- Add any other buttons if needed -->
-                        </td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-    </div>
-</div>
-
-	                        </div>
-	                    </div>
+	                       
 	                </article>
 	            </div>
 	        </div>

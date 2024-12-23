@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -360,18 +362,20 @@
                             </tr>
                         </thead>
                         <tbody>
+                              <c:forEach var="order" items="${orders}">
+                        
                             <tr>
-                                <td class="text-align-center">#1</td>
-                                <td class="text-align-center">09:42 02/12/2023</td>
-                                <td class="text-align-center"> 09847372734</td>
+                                <td class="text-align-center">#${order.id}</td>
+                                <td class="text-align-center">${order.date }</td>
+                                <td class="text-align-center"> ${order.phone}</td>
                                 <td class="text-align-center">
 									<span style="color: #00c9a7; background-color: rgba(0,201,167,.1); padding:3px; border-radius: .3125rem;transition: all .2s ease-in-out;">
 								    	<span style=" background-color: #00c9a7!important;display: inline-block; width: .5rem; height: .5rem; border-radius: 50%;margin-right: .4375rem;"></span>
-								    	Đang vận chuyển
+								    	Đã thanh toán
 								    </span>
 								</td>
-                                <td>Ngân hàng JCB</td>
-                                <td>580,000đ</td>
+                                <td>Tiền mặt</td>
+                                <td>${order.total}đ</td>
                                 <td>
                                     <div class="group">
                                         <a class="group-child" href=""><i class="fa-solid fa-pen-to-square"></i>
@@ -381,6 +385,8 @@
                                     </div>
                                 </td>
                             </tr>
+                                        </c:forEach>
+                            
                         </tbody>
                     </table>
                 </div>

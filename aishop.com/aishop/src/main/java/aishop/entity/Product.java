@@ -1,35 +1,38 @@
 package aishop.entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
-// Mapping theo kiểu Hibernate
 @Entity
-@Table(name = "products") // Tên bảng trong cơ sở dữ liệu
+@Table(name = "products")
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // ID tự động tăng
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id; // Trường id, là khóa chính
+    private int id;
 
     @Column(name = "name", nullable = false, length = 255)
-    private String name; // Tên sản phẩm
+    private String name;
 
     @Column(name = "description", columnDefinition = "TEXT")
-    private String description; // Mô tả sản phẩm
+    private String description;
 
     @Column(name = "image", length = 255)
-    private String image; // Đường dẫn hình ảnh
+    private String image;
 
     @Column(name = "brand", length = 255)
-    private String brand; // Thương hiệu
+    private String brand;
 
-    @Column(name = "price", nullable = false)  // Thêm cột price vào bảng
-    private double price; // Giá sản phẩm
+    @Column(name = "price", nullable = false)
+    private double price;
+
+    // Quan hệ OneToMany với OrderDetail
+    @OneToMany(mappedBy = "product")
+    private Set<OrderDetail> orderDetails;
 
     // Constructor không tham số (bắt buộc cho Hibernate)
-    public Product() {
-    }
+    public Product() {}
 
     // Constructor đầy đủ tham số
     public Product(int id, String name, String description, String image, String brand, double price) {
@@ -102,5 +105,14 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    // Getter và Setter cho orderDetails
+    public Set<OrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(Set<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
     }
 }

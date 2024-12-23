@@ -292,7 +292,7 @@ input[type="checkbox"] {
             <td>${cart.product.price * cart.quantity}₫</td>
             <!-- Checkbox để chọn sản phẩm -->
             <td>
-                <input type="checkbox" name="cartId" value="${cart.id}"  />
+		<input type="checkbox" name="cartId" value="${cart.id}" required />
             </td>
         </tr>
     </c:forEach>
@@ -304,8 +304,7 @@ input[type="checkbox"] {
     </c:if>
 	                                </div>
                                     <span><h2 class="title">2. Thông tin thanh toán</h2></span>
-                                    <form method="post" style="margin-bottom: 25px;" class="payment-block clearfix ng-pristine ng-invalid ng-invalid-required ng-valid-email d-flex justify-content-around" id="checkout-container">
-                                        <div class="col-md-4 col-sm-12 col-xs-12 payment-step step2">
+                                    <form action="checkout.htm"  style="margin-bottom: 25px;" class="payment-block clearfix ng-pristine ng-invalid ng-invalid-required ng-valid-email d-flex justify-content-around" id="myForm" method="POST">                                        <div class="col-md-4 col-sm-12 col-xs-12 payment-step step2">
                                             <h4>1. Thông tin KH, địa chỉ thanh toán</h4>
                                             <div class="step-preview clearfix">
                                                 <h2 class="title">Thông tin khách hàng</h2>
@@ -365,34 +364,10 @@ input[type="checkbox"] {
                                                         <option value="EXIMBANK">Ngan hang EximBank </option>
                                                     </select>
                                                 </div>
-                                                <div id="card_pay_VISA" style="display: none;">
-                                                    <div style="display: flex; align-items: center;">
-                                                        <label for="bankcode">Thông tin thẻ</label>                                                          
-                                                        <div class="input-extend input-extend-right">
-                                                        <div class="input-box input-ic-clear"></div>
-                                                            <div class="input-box input-extend-inner">
-                                                                <div class="logo-brands-small">
-                                                                    <img src="./assets/img/logos/bank/visa.png" style="width: 39px; margin-left: 15px; margin-bottom: 8px;" alt="">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div id="card_pay" style="display: none;">
-                                                    <label class="label_pay" for="bankcode"><span style="color: red;">* </span>Số thẻ: </label>   
-                                                    <div class="form-group"><input class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required font_pay" style="font-size: 15px !important; font-weight: 400 !important;" placeholder="Nhập số thẻ" type="digits" name="card_number" required=""></div>  
-                                                    <div style="display: flex; justify-content: space-between;">
-                                                        <label class="label_pay" style="flex: 0.4;" for="bankcode"><span style="color: red;">* </span>Ngày hết hạn: </label>
-                                                        <label class="label_pay" style="flex: 0.38;" for="bankcode"><span style="color: red;">* </span>CVC/CVV: </label>
-                                                    </div>
-                                                    <div style="display: flex;">
-                                                        <div class="form-group" style="margin-right: 4px;"><input class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required font_pay" style="font-size: 15px !important; font-weight: 400 !important;" placeholder="MM/YY" type="text" name="date_HH" required=""></div>
-                                                        <div class="form-group"><input class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required font_pay" style="font-size: 15px !important; font-weight: 400 !important;" placeholder="CVC/CVV" type="digits" name="cvc_cvv" required=""></div>
-                                                    </div>  
-                                                </div>
+                                               
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input id="resetCheckbox" type="checkbox" onclick="toggleDeliveryAddress()" name="check_pay_off" class="ng-pristine ng-untouched ng-valid"> Thanh toán khi nhận hàng
+                                                        <input style="width:12px;height:12px" id="resetCheckbox" type="checkbox"  name="check_pay_off" class="ng-pristine ng-untouched ng-valid"> Thanh toán khi nhận hàng
                                                     </label>
                                                 </div>
                                                 <span class="error_login" style="display: block; margin-bottom: 22px; margin-left: 0;"></span>
@@ -408,27 +383,32 @@ input[type="checkbox"] {
                                                     <div class="total-payment">
                                                         Phí vận chuyển  <span class="ng-binding">0 ₫</span>
                                                     </div>
+                                                        <input type="hidden" name="total" id="total" value="0">
+                                                    
                                                     <div class="total-payment">
-                                                        Tổng Thanh toán <span class="pay-price ng-binding"  style="color: #0202aa; font-weight: 400;">0 ₫</span>
+                Tổng Thanh toán <span class="total pay-price ng-binding" style="color: #0202aa; font-weight: 400;" id="totalPayment">0 ₫</span>
                                                     </div>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
+							<div>
+												 <c:if test="${not empty carts}">
+					        <c:forEach var="cart" items="${carts}">
+						            <input type="hidden" name="product_id" value="${cart.product.id}">
+						            <input type="hidden" name="quantity" value="${cart.quantity}">
+									<input type="hidden" name="price" value="${cart.product.price * cart.quantity}">
+						        </c:forEach>
+						    </c:if>
+							  <input type="hidden" name="total" id="totalValue" value="0">
+							
+							<button  class="btn button button-secondary btn--hover"  type="submit" onclick="submitForm()">
+							    Xác nhận thanh toán
+							</button>  </div>                                      
                                     </form>
-                                    <span><h2 class="title">3. Xác nhận thanh toán</h2></span>
-                                    <form  method="post">
-                                        <label class="label_pay" for="bankcode"><span style="color: red;">* </span>Mã xác thực: </label>  
-                                        <div class="form-group" style="display: flex; align-items: flex-end;">
-                                            <input class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required font_pay" style="font-size: 15px !important; font-weight: 400 !important;" name="code--verify"  placeholder="Nhập mã xác thực" type="text" required="">
-                                            <span style="font-size: 15px;color: red; font-weight: 400; margin-left: 11px;">Mã xác thực không khớp !</span>
-                                        </div>  
-                                        <span style="font-size: 15px; background-color: antiquewhite; padding: 3px; font-weight: 400;">Mã xác thực đã được gửi về email người dùng. Vui lòng xác nhận mã tại email !</span> 
-                                        <div class="button text-right" style="margin-bottom: 25px;">
-                                            <button class="btn btn-default" name="pay_quit" type="submit">Hủy thanh toán</button>
-                                            <button class="btn button button-secondary btn--hover" name="pay_confirm" type="submit">Tiến hành thanh toán</button>
-                                        </div>
-                                    </form>  
+                                   
                                 </div>
+                                
                             </div>
                         </article>
                     </div>
@@ -510,7 +490,27 @@ input[type="checkbox"] {
 
     <!-- End Footer-->
    <script>
+
     // Hàm tính tổng tiền và cập nhật vào .pay-price
+       function updateTotal() {
+        var totalText = document.querySelector('.total').textContent; // Lấy giá trị của span
+        var totalValue = totalText.replace(' ₫', '').trim(); // Xóa ký tự ₫ và trim khoảng trắng
+        document.getElementById('hiddenTotal').value = totalValue; // Cập nhật giá trị vào input ẩn
+    }
+    function submitForm() {
+    // Lấy form bằng ID
+    var form = document.getElementById('myForm');
+    
+    // Kiểm tra xem form có hợp lệ không
+    if (form.checkValidity()) {
+        // Gửi form đi
+        form.submit();
+        alert("Bạn đã mua sản phẩm thành công !")
+    } else {
+        alert("Hãy điền thông tin !.");
+    }
+}
+
     function calculateTotal() {
         let total = 0; // Khởi tạo tổng bằng 0
         // Lấy tất cả checkbox được chọn
@@ -527,6 +527,10 @@ input[type="checkbox"] {
         // Cập nhật tổng tiền vào phần tử .pay-price
         const payPriceElement = document.querySelector('.total-payment .pay-price');
         payPriceElement.textContent = total.toLocaleString('vi-VN') + ' ₫';
+
+        // Cập nhật giá trị tổng vào input ẩn để gửi qua form
+        const totalInput = document.querySelector('#total');
+        totalInput.value = total; // Cập nhật giá trị tổng vào input ẩn
     }
 
     // Gắn sự kiện thay đổi cho tất cả checkbox
@@ -536,6 +540,7 @@ input[type="checkbox"] {
 
     // Tính toán tổng khi trang được tải
     window.onload = calculateTotal;
+
 </script>
 
     <script src="/aishop/resources/assets/js/style.js"></script>

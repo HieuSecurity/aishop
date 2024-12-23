@@ -1,5 +1,8 @@
 package aishop.controller;
 import aishop.dao.CartDAO;
+
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import aishop.dao.ProductDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,38 +19,161 @@ import aishop.entity.Account;
 import org.springframework.web.bind.annotation.RequestMethod;
 import aishop.entity.Cart;
 import aishop.entity.Product;
+import aishop.entity.OrderDetail;
+import aishop.dao.OrderDetailDAO;
+
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import aishop.dao.ProductDAO;
+import aishop.dao.OrderDAO;
+
+import aishop.dao.OrderDetailDAO;
+import aishop.entity.Order;
 @Controller
 public class ViewClient {
 	@Autowired
 	ProductDAO productDAO;
 	@Autowired
     private CartDAO cartDAO;
-	@RequestMapping(value = "/cart.htm")
-	public String getAllCartsByCustomerId(HttpSession session, Model model) {
-	    // Lấy customerId từ session
-	    Integer customerId = (Integer) session.getAttribute("customerId");
-	    Account customer = (Account) session.getAttribute("user");
-        System.out.println((Account) session.getAttribute("user"));
-        System.out.println(customerId);
+	@Autowired
+	 private OrderDAO orderDAO;
+	@Autowired
+	 private OrderDetailDAO OrderDetail;
+		
+	
+	  @RequestMapping(value = "/cart.htm")
+	  public String getAllCartsByCustomerId(HttpSession session, Model model) {
+	      // Lấy customerId từ session
+	      Integer customerId = (Integer) session.getAttribute("customerId");
+	      Account customer = (Account) session.getAttribute("user");
 
-	    if (customerId == null) {
-	       
-	        return "auth/sign-in";  // Chuyển hướng đến trang đăng nhập nếu không có customerId trong session
+	      if (customerId == null) {
+	          return "auth/sign-in";  // Chuyển hướng đến trang đăng nhập nếu không có customerId trong session
+	      }
+
+	      // Lấy danh sách Cart cho customerId từ CartDAO
+	      List<Cart> carts = cartDAO.getAllCartsByCustomerId(customerId);
+	      List<Order> orders = orderDAO.getPurchasedOrdersByCustomerId(customerId);  // Lấy đơn hàng thay vì sản phẩm đã thanh toán
+
+	      // Kiểm tra giỏ hàng
+	      if (carts == null || carts.isEmpty()) {
+	          model.addAttribute("cartError", "Không có sản phẩm nào trong giỏ hàng!");
+	      } else {
+	    	  
+	          model.addAttribute("carts", carts);
+	      }
+
+	      // Kiểm tra đơn hàng đã thanh toán
+	      if (orders == null || orders.isEmpty()) {
+	    	  
+	          model.addAttribute("orderError", "Bạn chưa có sản phẩm đã thanh toán!");
+	      } else {
+	          model.addAttribute("orders", orders);  // Truyền danh sách đơn hàng vào model
+	      }
+
+	      return "client/cart";  // View hiển thị danh sách giỏ hàng
+	  }
+	  @RequestMapping(value = "/manager-orders.htm")
+	    public String getAllOrders(HttpSession session, Model model) {
+	        // Lấy danh sách đơn hàng từ service
+	        List<Order> orders = OrderDetail.getAllOrders(); 
+	        
+	        // Đưa danh sách đơn hàng vào model để truyền cho view
+	        model.addAttribute("orders", orders);
+
+	        // Trả về tên view (JSP) mà bạn muốn hiển thị
+	        return "admin/order-detail";  
 	    }
+	  @RequestMapping("/detailhistory.htm")
+	  public String getOrderDetails(@RequestParam("orderId") int orderId, Model model) {
+	      List<OrderDetail> orderDetails = OrderDetail.getOrderDetailsByOrderId(orderId);
+	      model.addAttribute("orderDetails", orderDetails);
+	      return "client/detailhistory";  // Trang hiển thị chi tiết đơn hàng
+	  }
 
-	    // Lấy danh sách Cart cho customerId từ CartDAO
-	    List<Cart> carts = cartDAO.getAllCartsByCustomerId(customerId);
+//	@RequestMapping(value = "/cart.htm", method = RequestMethod.GET)
+//    public String getCartItems(HttpSession session, Model model) {
+//        // Lấy customerId từ session
+//        Integer customerId = (Integer) session.getAttribute("customerId");
+//
+//        // Kiểm tra xem customerId có trong session hay không
+//        if (customerId == null) {
+//            return "auth/sign-in";  // Nếu không có customerId, chuyển hướng đến trang đăng nhập
+//        }
+//
+//        // Lấy các sản phẩm đã thanh toán của khách hàng
+//        List<Product> purchasedProducts = orderDAO.getPurchasedProductsByCustomerId(customerId);
+//
+//        // Nếu không có sản phẩm, hiển thị thông báo lỗi
+//        if (purchasedProducts == null || purchasedProducts.isEmpty()) {
+//            model.addAttribute("error", "Không có sản phẩm nào đã thanh toán.");
+//        } else {
+//            model.addAttribute("products", purchasedProducts);
+//        }
+//
+//        // Trả về trang giỏ hàng (cart)
+//        return "client/cart";
+//    }
 
-	    if (carts == null || carts.isEmpty()) {
-	        model.addAttribute("error", "Không có sản phẩm nào trong giỏ hàng !");
-	    } else {
-	        model.addAttribute("carts", carts);
-	    }
+	  @RequestMapping(value = "checkout.htm", method = RequestMethod.POST)
+	  public String processCheckout(HttpSession session,
+	                                @RequestParam("name") String name,
+	                                @RequestParam("phone") String phone,
+	                                @RequestParam("email") String email,
+	                                @RequestParam("city_address") String address,
+	                                @RequestParam("note_address") String note,
+	                                @RequestParam("total") double total,
+	                                @RequestParam("product_id") List<Integer> productIds,
+	                                @RequestParam("quantity") List<Integer> quantities,
+	                                @RequestParam("price") List<Double> prices,
+	                                Model model) {
 
-	    return "client/cart";  // View hiển thị danh sách giỏ hàng
-	}
+	      Integer customerId = (Integer) session.getAttribute("customerId");
+
+	      // Lấy ngày hiện tại và chuyển nó thành chuỗi
+	      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	      String formattedDate = sdf.format(new Date());
+
+	      // Tạo đối tượng Order mới và lưu vào cơ sở dữ liệu
+	      Order order = new Order();
+	      order.setStatus("SUCCESS");
+	      order.setDate(formattedDate);
+	      order.setPhone(phone);
+	      order.setAddress(address);
+	      order.setTotal(total);
+	      order.setCustomerId(customerId);
+
+	      // Lưu đơn hàng vào cơ sở dữ liệu thông qua OrderDAO
+	      int orderId = orderDAO.saveOrder(order);  // Lưu và nhận ID của đơn hàng
+
+	      // Cập nhật Order với orderId
+	      order.setId(orderId);  // Cập nhật ID từ cơ sở dữ liệu vào đối tượng order
+
+	      // Lưu các chi tiết đơn hàng (OrderDetail)
+	      for (int i = 0; i < productIds.size(); i++) {
+	          Product product = productDAO.getProductById(productIds.get(i));  // Lấy sản phẩm từ DB
+
+	          // Tạo đối tượng OrderDetail và thiết lập thông tin
+	          OrderDetail orderDetail = new OrderDetail();
+	          orderDetail.setOrder(order);  // Thiết lập order cho OrderDetail
+	          orderDetail.setProduct(product);  // Thiết lập product cho OrderDetail
+	          orderDetail.setQuantity(quantities.get(i));  // Thiết lập số lượng
+	          orderDetail.setPrice(prices.get(i));  // Thiết lập giá
+
+	          // Lưu OrderDetail vào cơ sở dữ liệu
+	          OrderDetail.saveOrderDetail(orderDetail);
+	      }
+
+	      // Thêm đối tượng Order vào mô hình để hiển thị trên trang xác nhận
+	      model.addAttribute("order", order);
+
+	      // Trả về trang xác nhận
+	      return "redirect:/cart.htm";
+	  }
+
+
+
+
 	@RequestMapping(value = "addToCart.htm", method = RequestMethod.POST)
 	public String addToCart(@RequestParam("productId") int productId,
 	                        @RequestParam("quantity") int quantity,
@@ -156,6 +282,11 @@ public class ViewClient {
 	public String about(){
 		return "client/about";
 	}
+	@RequestMapping(value = "/detailhistory")
+	public String DetailHistory(){
+		return "client/detailhistory";
+	}
+	
 	
 	
 	
